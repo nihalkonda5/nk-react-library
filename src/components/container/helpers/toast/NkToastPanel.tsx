@@ -14,7 +14,12 @@ export default function NkToastPanel() {
         body: string,
         disappearIn: number
     }[]>([]);
+    const [counter, setCounter] = React.useState(0);
     const [scrollY, setScrollY] = React.useState(0);
+
+    React.useEffect(() => {
+        console.log('counter', counter);
+    }, [counter])
 
     React.useEffect(() => {
         console.log('NkToastPanel useEffect []')
@@ -29,7 +34,8 @@ export default function NkToastPanel() {
                     title, body, disappearIn: ctime + 5000
                 })
                 setToastList(_toastList);
-                console.log('ToastList', _toastList);
+                setCounter(counter + 1);
+                console.log('ToastList', _toastList, 'counter', counter);
             }
         };
 

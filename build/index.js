@@ -10625,7 +10625,11 @@ function NkToast(_a) {
 function NkToastPanel() {
     console.log('NkToastPanel rendering');
     var _a = React__default.useState([]), toastList = _a[0], setToastList = _a[1];
-    var _b = React__default.useState(0), scrollY = _b[0], setScrollY = _b[1];
+    var _b = React__default.useState(0), counter = _b[0], setCounter = _b[1];
+    var _c = React__default.useState(0), scrollY = _c[0], setScrollY = _c[1];
+    React__default.useEffect(function () {
+        console.log('counter', counter);
+    }, [counter]);
     React__default.useEffect(function () {
         console.log('NkToastPanel useEffect []');
         window.addEventListener('scroll', function () {
@@ -10640,7 +10644,8 @@ function NkToastPanel() {
                     disappearIn: ctime + 5000
                 });
                 setToastList(_toastList);
-                console.log('ToastList', _toastList);
+                setCounter(counter + 1);
+                console.log('ToastList', _toastList, 'counter', counter);
             }
         };
         NkReactUtils$1.setToastPanel(callback);
