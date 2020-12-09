@@ -11,6 +11,10 @@ export default function NkRedirect() {
     const [redirect, setRedirect] = React.useState<string | null>(null);
 
     React.useEffect(() => {
+        console.log('NkRedirect', redirect);
+    }, [redirect])
+
+    React.useEffect(() => {
 
         const callback: NkRedirectRef = {
             redirect: (path: string) => {

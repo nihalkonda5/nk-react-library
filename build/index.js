@@ -10883,6 +10883,9 @@ var LocationLoader = distModules_2()(NkLocationLoader);
 function NkRedirect() {
     var _a = React__default.useState(null), redirect = _a[0], setRedirect = _a[1];
     React__default.useEffect(function () {
+        console.log('NkRedirect', redirect);
+    }, [redirect]);
+    React__default.useEffect(function () {
         var callback = {
             redirect: function (path) {
                 setRedirect(path);
