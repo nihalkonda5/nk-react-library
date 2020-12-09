@@ -1,0 +1,1 @@
+{"version":3,"file":"index.es.js","sources":["../src/index.tsx"],"sourcesContent":["import React from 'react'\n\nexport default function MyComponent() {\n    return (\n        <div>\n            <h1>Happy Birthday</h1>\n        </div>\n    )\n}\n"],"names":[],"mappings":";;SAEwB,WAAW;IAC/B,QACI;QACI,iDAAuB,CACrB,EACT;AACL;;;;"}
