@@ -2864,32 +2864,6 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-/**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-var REACT_STATICS = {
-  childContextTypes: true,
-  contextType: true,
-  contextTypes: true,
-  defaultProps: true,
-  displayName: true,
-  getDefaultProps: true,
-  getDerivedStateFromError: true,
-  getDerivedStateFromProps: true,
-  mixins: true,
-  propTypes: true,
-  type: true
-};
-var KNOWN_STATICS = {
-  name: true,
-  length: true,
-  prototype: true,
-  caller: true,
-  callee: true,
-  arguments: true,
-  arity: true
-};
 var FORWARD_REF_STATICS = {
   '$$typeof': true,
   render: true,
@@ -2908,61 +2882,6 @@ var MEMO_STATICS = {
 var TYPE_STATICS = {};
 TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
 TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-
-function getStatics(component) {
-  // React v16.11 and below
-  if (reactIs.isMemo(component)) {
-    return MEMO_STATICS;
-  } // React v16.12 and above
-
-
-  return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
-}
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols$1 = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = Object.prototype;
-function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-  if (typeof sourceComponent !== 'string') {
-    // don't hoist over string (html) components
-    if (objectPrototype) {
-      var inheritedComponent = getPrototypeOf(sourceComponent);
-
-      if (inheritedComponent && inheritedComponent !== objectPrototype) {
-        hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-      }
-    }
-
-    var keys = getOwnPropertyNames(sourceComponent);
-
-    if (getOwnPropertySymbols$1) {
-      keys = keys.concat(getOwnPropertySymbols$1(sourceComponent));
-    }
-
-    var targetStatics = getStatics(targetComponent);
-    var sourceStatics = getStatics(sourceComponent);
-
-    for (var i = 0; i < keys.length; ++i) {
-      var key = keys[i];
-
-      if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-
-        try {
-          // Avoid failures from read-only properties
-          defineProperty(targetComponent, key, descriptor);
-        } catch (e) {}
-      }
-    }
-  }
-
-  return targetComponent;
-}
-
-var hoistNonReactStatics_cjs = hoistNonReactStatics;
 
 // TODO: Replace with React.createContext once we can assume React 16+
 
@@ -3631,37 +3550,6 @@ if (process.env.NODE_ENV !== "production") {
     process.env.NODE_ENV !== "production" ? warning(!(this.props.location && !prevProps.location), '<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.') : void 0;
     process.env.NODE_ENV !== "production" ? warning(!(!this.props.location && prevProps.location), '<Switch> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.') : void 0;
   };
-}
-
-/**
- * A public higher-order component to access the imperative API
- */
-
-function withRouter(Component) {
-  var displayName = "withRouter(" + (Component.displayName || Component.name) + ")";
-
-  var C = function C(props) {
-    var wrappedComponentRef = props.wrappedComponentRef,
-        remainingProps = _objectWithoutPropertiesLoose(props, ["wrappedComponentRef"]);
-
-    return React.createElement(context.Consumer, null, function (context) {
-      !context ? process.env.NODE_ENV !== "production" ? invariant(false, "You should not use <" + displayName + " /> outside a <Router>") : invariant(false) : void 0;
-      return React.createElement(Component, _extends({}, remainingProps, context, {
-        ref: wrappedComponentRef
-      }));
-    });
-  };
-
-  C.displayName = displayName;
-  C.WrappedComponent = Component;
-
-  if (process.env.NODE_ENV !== "production") {
-    C.propTypes = {
-      wrappedComponentRef: propTypes.oneOfType([propTypes.string, propTypes.func, propTypes.object])
-    };
-  }
-
-  return hoistNonReactStatics_cjs(C, Component);
 }
 
 var useContext = React.useContext;
@@ -10985,24 +10873,6 @@ var NkLocationLoader = /** @class */ (function (_super) {
 }(React.Component));
 var LocationLoader = distModules_2()(NkLocationLoader);
 
-var NkRedirect = withRouter(function NkRedirect(props) {
-    // const [redirect, setRedirect] = React.useState<string | null>(null);
-    // React.useEffect(() => {
-    //     console.log('NkRedirect', redirect);
-    // }, [redirect])
-    React.useEffect(function () {
-        var callback = {
-            redirect: function (path) {
-                // setRedirect(path);
-                props.history.push(path);
-            }
-        };
-        NkReactUtils$1.setRedirect(callback);
-    }, []);
-    return React.createElement(React.Fragment, null);
-    // return redirect ? <Redirect to={redirect} /> : <span />
-});
-
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
   var insertAt = ref.insertAt;
@@ -11153,7 +11023,6 @@ var NkContainer = /** @class */ (function (_super) {
     }
     NkContainer.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement(NkRedirect, null),
             this.props.requireLocation &&
                 React.createElement(LocationLoader, { onSuccess: function (position) {
                         NkReactUtils$1.setLocation(position.coords.latitude, position.coords.longitude, position.coords);

@@ -5,7 +5,6 @@ import { Container } from 'react-bootstrap';
 import NkReactUtils from '../../utils/nk.react.utils'
 import NkToastPanel from './helpers/toast/NkToastPanel'
 import LocationLoader from './helpers/NkLocationLoader';
-import NkRedirect from './helpers/NkRedirect';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -21,7 +20,6 @@ export default class NkContainer extends Component<{
     render() {
         return (
             <>
-                <NkRedirect />
                 {
                     this.props.requireLocation &&
                     <LocationLoader onSuccess={(position) => {
