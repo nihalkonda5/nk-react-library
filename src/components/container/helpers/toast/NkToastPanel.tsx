@@ -18,8 +18,8 @@ export default function NkToastPanel() {
     const [scrollY, setScrollY] = React.useState(0);
 
     React.useEffect(() => {
-        console.log('counter', counter);
-    }, [counter])
+        console.log('toastList', toastList, 'counter', counter);
+    }, [toastList, counter])
 
     React.useEffect(() => {
         console.log('NkToastPanel useEffect []')
@@ -28,15 +28,16 @@ export default function NkToastPanel() {
         })
         const callback: NkToastPanelRef = {
             addToast: (title: string, body: string) => {
-                const ctime = new Date().getTime();
-                console.log('ToastList', toastList);
-                const _toastList = toastList.filter((t) => t.disappearIn > ctime);
-                _toastList.push({
-                    title, body, disappearIn: ctime + 5000
+                setToastList((prevState) => {
+                    const ctime = new Date().getTime();
+                    console.log('ToastList', prevState);
+                    prevState = prevState.filter((t) => t.disappearIn > ctime);
+                    prevState.push({
+                        title, body, disappearIn: ctime + 5000
+                    })
+                    setCounter(ctr => ctr + 1);
+                    return prevState;
                 })
-                setToastList(_toastList);
-                setCounter(counter + 1);
-                console.log('ToastList', _toastList, 'counter', counter);
             }
         };
 

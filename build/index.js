@@ -10628,8 +10628,8 @@ function NkToastPanel() {
     var _b = React__default.useState(0), counter = _b[0], setCounter = _b[1];
     var _c = React__default.useState(0), scrollY = _c[0], setScrollY = _c[1];
     React__default.useEffect(function () {
-        console.log('counter', counter);
-    }, [counter]);
+        console.log('toastList', toastList, 'counter', counter);
+    }, [toastList, counter]);
     React__default.useEffect(function () {
         console.log('NkToastPanel useEffect []');
         window.addEventListener('scroll', function () {
@@ -10637,16 +10637,17 @@ function NkToastPanel() {
         });
         var callback = {
             addToast: function (title, body) {
-                var ctime = new Date().getTime();
-                console.log('ToastList', toastList);
-                var _toastList = toastList.filter(function (t) { return t.disappearIn > ctime; });
-                _toastList.push({
-                    title: title, body: body,
-                    disappearIn: ctime + 5000
+                setToastList(function (prevState) {
+                    var ctime = new Date().getTime();
+                    console.log('ToastList', prevState);
+                    prevState = prevState.filter(function (t) { return t.disappearIn > ctime; });
+                    prevState.push({
+                        title: title, body: body,
+                        disappearIn: ctime + 5000
+                    });
+                    setCounter(function (ctr) { return ctr + 1; });
+                    return prevState;
                 });
-                setToastList(_toastList);
-                setCounter(counter + 1);
-                console.log('ToastList', _toastList, 'counter', counter);
             }
         };
         NkReactUtils$1.setToastPanel(callback);
