@@ -10638,6 +10638,7 @@ function NkToastPanel() {
         var callback = {
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
+                console.log('ToastList', toastList);
                 var _toastList = toastList.filter(function (t) { return t.disappearIn > ctime; });
                 _toastList.push({
                     title: title, body: body,

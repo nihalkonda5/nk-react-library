@@ -29,6 +29,7 @@ export default function NkToastPanel() {
         const callback: NkToastPanelRef = {
             addToast: (title: string, body: string) => {
                 const ctime = new Date().getTime();
+                console.log('ToastList', toastList);
                 const _toastList = toastList.filter((t) => t.disappearIn > ctime);
                 _toastList.push({
                     title, body, disappearIn: ctime + 5000
