@@ -10616,6 +10616,8 @@ function NkToastPanel(_a) {
         window.addEventListener('scroll', function () {
             setScrollY(window.scrollY);
         });
+    }, []);
+    React.useEffect(function () {
         console.log('NkToastPanel ref trouble', ref);
         ref && ref({
             addToast: function (title, body) {
@@ -10628,7 +10630,7 @@ function NkToastPanel(_a) {
                 setToastList(_toastList);
             }
         });
-    }, []);
+    }, [ref]);
     return (React.createElement("div", { style: {
             position: 'absolute',
             top: 15 + scrollY,
@@ -10866,7 +10868,7 @@ function NkRedirect(_a) {
                 setRedirect(path);
             }
         });
-    }, []);
+    }, [ref]);
     return redirect ? React.createElement(Redirect, { to: redirect, push: true }) : React.createElement("span", null);
 }
 
@@ -10975,7 +10977,7 @@ function NkModal(_a) {
                 return promise;
             }
         });
-    }, []);
+    }, [ref]);
     return (React.createElement(Modal$1, { show: show, onClose: function () {
             if (data.type === 'confirm') {
                 data.reject(new Error('Confirm closed'));

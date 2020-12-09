@@ -17,7 +17,7 @@ export default function NkRedirect({ ref }: {
                 setRedirect(path);
             }
         })
-    }, [])
+    }, [ref])
 
     return redirect ? <Redirect to={redirect} push /> : <span />
 }

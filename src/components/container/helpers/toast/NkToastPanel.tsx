@@ -20,6 +20,9 @@ export default function NkToastPanel({ ref }: {
         window.addEventListener('scroll', () => {
             setScrollY(window.scrollY);
         })
+    }, [])
+
+    React.useEffect(() => {
         console.log('NkToastPanel ref trouble', ref)
         ref && ref({
             addToast: (title: string, body: string) => {
@@ -31,7 +34,7 @@ export default function NkToastPanel({ ref }: {
                 setToastList(_toastList);
             }
         });
-    }, [])
+    }, [ref])
 
     return (
         <div style={{

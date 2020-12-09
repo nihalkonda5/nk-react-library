@@ -10623,6 +10623,8 @@ function NkToastPanel(_a) {
         window.addEventListener('scroll', function () {
             setScrollY(window.scrollY);
         });
+    }, []);
+    React__default.useEffect(function () {
         console.log('NkToastPanel ref trouble', ref);
         ref && ref({
             addToast: function (title, body) {
@@ -10635,7 +10637,7 @@ function NkToastPanel(_a) {
                 setToastList(_toastList);
             }
         });
-    }, []);
+    }, [ref]);
     return (React__default.createElement("div", { style: {
             position: 'absolute',
             top: 15 + scrollY,
@@ -10873,7 +10875,7 @@ function NkRedirect(_a) {
                 setRedirect(path);
             }
         });
-    }, []);
+    }, [ref]);
     return redirect ? React__default.createElement(Redirect, { to: redirect, push: true }) : React__default.createElement("span", null);
 }
 
@@ -10982,7 +10984,7 @@ function NkModal(_a) {
                 return promise;
             }
         });
-    }, []);
+    }, [ref]);
     return (React__default.createElement(Modal$1, { show: show, onClose: function () {
             if (data.type === 'confirm') {
                 data.reject(new Error('Confirm closed'));

@@ -92,7 +92,7 @@ export default function NkModal(this: any, { ref }: {
                 return promise;
             }
         });
-    }, [])
+    }, [ref])
 
     return (
         <Modal show={show} onClose={() => {
