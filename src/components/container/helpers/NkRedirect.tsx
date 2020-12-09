@@ -1,30 +1,31 @@
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { NkReactUtils } from '../../../utils';
+import { withRouter } from 'react-router-dom';
 
 export interface NkRedirectRef {
     redirect(path: string): any
 }
 
-export default function NkRedirect() {
-    const [redirect, setRedirect] = React.useState<string | null>(null);
+export default withRouter(function NkRedirect(props) {
+    // const [redirect, setRedirect] = React.useState<string | null>(null);
 
-    React.useEffect(() => {
-        console.log('NkRedirect', redirect);
-    }, [redirect])
+    // React.useEffect(() => {
+    //     console.log('NkRedirect', redirect);
+    // }, [redirect])
 
     React.useEffect(() => {
 
         const callback: NkRedirectRef = {
             redirect: (path: string) => {
-                setRedirect(path);
+                // setRedirect(path);
+                props.history.push(path);
             }
         };
 
         NkReactUtils.setRedirect(callback);
 
     }, [])
-
-    return redirect ? <Redirect to={redirect} /> : <span />
-}
+    return <></>;
+    // return redirect ? <Redirect to={redirect} /> : <span />
+});
