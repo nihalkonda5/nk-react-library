@@ -12,7 +12,7 @@ export default function NkRedirect({ ref }: {
     const [redirect, setRedirect] = React.useState<string | null>(null);
 
     React.useEffect(() => {
-        ref({
+        ref && ref({
             redirect: (path: string) => {
                 setRedirect(path);
             }

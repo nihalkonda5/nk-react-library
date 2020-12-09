@@ -41,7 +41,7 @@ export default function NkModal(this: any, { ref }: {
 
     React.useEffect(() => {
 
-        ref({
+        ref && ref({
             prompt: (data) => {
                 const promise = new Promise<string | null>((resolve, reject) => {
 

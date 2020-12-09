@@ -21,7 +21,7 @@ export default function NkToastPanel({ ref }: {
             setScrollY(window.scrollY);
         })
         console.log('NkToastPanel ref trouble', ref)
-        ref({
+        ref && ref({
             addToast: (title: string, body: string) => {
                 const ctime = new Date().getTime();
                 const _toastList = toastList.filter((t) => t.disappearIn > ctime);

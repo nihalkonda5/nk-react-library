@@ -10617,7 +10617,7 @@ function NkToastPanel(_a) {
             setScrollY(window.scrollY);
         });
         console.log('NkToastPanel ref trouble', ref);
-        ref({
+        ref && ref({
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
                 var _toastList = toastList.filter(function (t) { return t.disappearIn > ctime; });
@@ -10861,7 +10861,7 @@ function NkRedirect(_a) {
     var ref = _a.ref;
     var _b = React.useState(null), redirect = _b[0], setRedirect = _b[1];
     React.useEffect(function () {
-        ref({
+        ref && ref({
             redirect: function (path) {
                 setRedirect(path);
             }
@@ -10937,7 +10937,7 @@ function NkModal(_a) {
     }), data = _c[0], setData = _c[1];
     var _d = React.useState(null), value = _d[0], setValue = _d[1];
     React.useEffect(function () {
-        ref({
+        ref && ref({
             prompt: function (data) {
                 var promise = new Promise(function (resolve, reject) {
                     setData({
