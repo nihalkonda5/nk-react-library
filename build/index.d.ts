@@ -1,2 +1,2 @@
-/// <reference types="react" />
-export default function MyComponent(): JSX.Element;
+export * as Components from './components';
+export * as Utils from './utils';
