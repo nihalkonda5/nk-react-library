@@ -7,9 +7,7 @@ export interface NkRedirectRef {
     redirect(path: string): any
 }
 
-export default function NkRedirect({ ref }: {
-    ref(data: NkRedirectRef): any
-}) {
+export default function NkRedirect() {
     const [redirect, setRedirect] = React.useState<string | null>(null);
 
     React.useEffect(() => {
@@ -20,11 +18,9 @@ export default function NkRedirect({ ref }: {
             }
         };
 
-        ref && ref(callback);
-
         NkReactUtils.setRedirect(callback);
 
-    }, [ref])
+    }, [])
 
     return redirect ? <Redirect to={redirect} push /> : <span />
 }

@@ -19,9 +19,7 @@ export interface NkModalRef {
     confirm(data: IModalOperation): Promise<boolean | null>
 }
 
-export default function NkModal(this: any, { ref }: {
-    ref(data: NkModalRef): any
-}) {
+export default function NkModal() {
     const [show, setShow] = React.useState(false);
 
     const [data, setData] = React.useState({
@@ -75,13 +73,13 @@ export default function NkModal(this: any, { ref }: {
                 const promise = new Promise<boolean | null>((resolve, reject) => {
 
                     setData({
-                        type: 'prompt',
+                        type: 'confirm',
                         title: data.title,
                         body: <p>{data.description}</p>,
                         buttons: {
                             hasNegativeButton: true,
-                            negativeLabel: data.negativeLabel || 'Cancel',
-                            positiveLabel: data.positiveLabel || 'Submit',
+                            negativeLabel: data.negativeLabel || 'No',
+                            positiveLabel: data.positiveLabel || 'Yes',
                             positiveWarning: data.positiveWarning || false
                         },
                         resolve,
@@ -94,10 +92,8 @@ export default function NkModal(this: any, { ref }: {
             }
         };
 
-        ref && ref(callback);
-
         NkReactUtils.setModal(callback);
-    }, [ref])
+    }, [])
 
     return (
         <Modal show={show} onClose={() => {
@@ -116,13 +112,6 @@ export default function NkModal(this: any, { ref }: {
             </Modal.Body>
             <Modal.Footer>
                 {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={() => {
-                    // if (this.props.responseHandler) {
-                    //     this.props.responseHandler(null, () => {
-                    //         this.props.modal.closeModal();
-                    //     });
-                    // } else {
-                    //     this.props.modal.closeModal();
-                    // }
                     if (data.type === 'confirm') {
                         data.resolve(false);
                     } else if (data.type === 'prompt') {
@@ -131,13 +120,6 @@ export default function NkModal(this: any, { ref }: {
                     setShow(false);
                 }}>{data.buttons.negativeLabel || 'Cancel'}</Button>}
                 <Button variant={data.buttons.positiveWarning ? "warning" : "primary"} onClick={() => {
-                    // if (this.props.responseHandler) {
-                    //     this.props.responseHandler(this.state.value, () => {
-                    //         this.props.modal.closeModal();
-                    //     });
-                    // } else {
-                    //     this.props.modal.closeModal();
-                    // }
                     if (data.type === 'confirm') {
                         data.resolve(true);
                     } else if (data.type === 'prompt') {

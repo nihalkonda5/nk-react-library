@@ -7,10 +7,8 @@ export interface NkToastPanelRef {
     addToast(title: string, body: string): any
 }
 
-export default function NkToastPanel({ ref }: {
-    ref(data: NkToastPanelRef): any
-}) {
-    console.log('NkToastPanel ref trouble', ref)
+export default function NkToastPanel() {
+    console.log('NkToastPanel ref trouble',)
     const [toastList, setToastList] = React.useState<{
         title: string,
         body: string,
@@ -22,10 +20,7 @@ export default function NkToastPanel({ ref }: {
         window.addEventListener('scroll', () => {
             setScrollY(window.scrollY);
         })
-    }, [])
-
-    React.useEffect(() => {
-        console.log('NkToastPanel ref trouble', ref)
+        console.log('NkToastPanel ref trouble',)
         const callback: NkToastPanelRef = {
             addToast: (title: string, body: string) => {
                 const ctime = new Date().getTime();
@@ -34,12 +29,12 @@ export default function NkToastPanel({ ref }: {
                     title, body, disappearIn: ctime + 5000
                 })
                 setToastList(_toastList);
+                console.log('ToastList', _toastList);
             }
         };
-        ref && ref(callback);
 
         NkReactUtils.setToastPanel(callback);
-    }, [ref])
+    }, [])
 
     return (
         <div style={{

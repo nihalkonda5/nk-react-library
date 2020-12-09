@@ -21,9 +21,7 @@ export default class NkContainer extends Component<{
     render() {
         return (
             <div>
-                <NkRedirect ref={(data) => {
-                    NkReactUtils.setRedirect(data);
-                }} />
+                <NkRedirect />
                 {
                     this.props.requireLocation &&
                     <LocationLoader onSuccess={(position) => {
@@ -42,12 +40,8 @@ export default class NkContainer extends Component<{
                     position: 'relative'
                 }}>
                     {this.props.children}
-                    <NkToastPanel ref={(data) => {
-                        NkReactUtils.setToastPanel(data);
-                    }} />
-                    <NkModal ref={(data) => {
-                        NkReactUtils.setModal(data);
-                    }} />
+                    <NkToastPanel />
+                    <NkModal />
                 </Container>
             </div>
         )

@@ -10615,18 +10615,15 @@ function NkToast(_a) {
             React.createElement("br", null)); }))));
 }
 
-function NkToastPanel(_a) {
-    var ref = _a.ref;
-    console.log('NkToastPanel ref trouble', ref);
-    var _b = React.useState([]), toastList = _b[0], setToastList = _b[1];
-    var _c = React.useState(0), scrollY = _c[0], setScrollY = _c[1];
+function NkToastPanel() {
+    console.log('NkToastPanel ref trouble');
+    var _a = React.useState([]), toastList = _a[0], setToastList = _a[1];
+    var _b = React.useState(0), scrollY = _b[0], setScrollY = _b[1];
     React.useEffect(function () {
         window.addEventListener('scroll', function () {
             setScrollY(window.scrollY);
         });
-    }, []);
-    React.useEffect(function () {
-        console.log('NkToastPanel ref trouble', ref);
+        console.log('NkToastPanel ref trouble');
         var callback = {
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
@@ -10636,11 +10633,11 @@ function NkToastPanel(_a) {
                     disappearIn: ctime + 5000
                 });
                 setToastList(_toastList);
+                console.log('ToastList', _toastList);
             }
         };
-        ref && ref(callback);
         NkReactUtils$1.setToastPanel(callback);
-    }, [ref]);
+    }, []);
     return (React.createElement("div", { style: {
             position: 'absolute',
             top: 15 + scrollY,
@@ -10869,18 +10866,16 @@ var NkLocationLoader = /** @class */ (function (_super) {
 }(React.Component));
 var LocationLoader = distModules_2()(NkLocationLoader);
 
-function NkRedirect(_a) {
-    var ref = _a.ref;
-    var _b = React.useState(null), redirect = _b[0], setRedirect = _b[1];
+function NkRedirect() {
+    var _a = React.useState(null), redirect = _a[0], setRedirect = _a[1];
     React.useEffect(function () {
         var callback = {
             redirect: function (path) {
                 setRedirect(path);
             }
         };
-        ref && ref(callback);
         NkReactUtils$1.setRedirect(callback);
-    }, [ref]);
+    }, []);
     return redirect ? React.createElement(Redirect, { to: redirect, push: true }) : React.createElement("span", null);
 }
 
@@ -10933,10 +10928,9 @@ function NkSimpleInput(_a) {
         React.createElement(FormImpl.Text, { className: 'text-muted' }, description)));
 }
 
-function NkModal(_a) {
-    var ref = _a.ref;
-    var _b = React.useState(false), show = _b[0], setShow = _b[1];
-    var _c = React.useState({
+function NkModal() {
+    var _a = React.useState(false), show = _a[0], setShow = _a[1];
+    var _b = React.useState({
         title: '',
         type: 'custom',
         body: React.createElement("span", null),
@@ -10948,8 +10942,8 @@ function NkModal(_a) {
         },
         resolve: function (value) { console.log(value); },
         reject: function (error) { console.error(error); }
-    }), data = _c[0], setData = _c[1];
-    var _d = React.useState(null), value = _d[0], setValue = _d[1];
+    }), data = _b[0], setData = _b[1];
+    var _c = React.useState(null), value = _c[0], setValue = _c[1];
     React.useEffect(function () {
         var callback = {
             prompt: function (data) {
@@ -10973,13 +10967,13 @@ function NkModal(_a) {
             confirm: function (data) {
                 var promise = new Promise(function (resolve, reject) {
                     setData({
-                        type: 'prompt',
+                        type: 'confirm',
                         title: data.title,
                         body: React.createElement("p", null, data.description),
                         buttons: {
                             hasNegativeButton: true,
-                            negativeLabel: data.negativeLabel || 'Cancel',
-                            positiveLabel: data.positiveLabel || 'Submit',
+                            negativeLabel: data.negativeLabel || 'No',
+                            positiveLabel: data.positiveLabel || 'Yes',
                             positiveWarning: data.positiveWarning || false
                         },
                         resolve: resolve,
@@ -10989,9 +10983,8 @@ function NkModal(_a) {
                 return promise;
             }
         };
-        ref && ref(callback);
         NkReactUtils$1.setModal(callback);
-    }, [ref]);
+    }, []);
     return (React.createElement(Modal$1, { show: show, onClose: function () {
             if (data.type === 'confirm') {
                 data.reject(new Error('Confirm closed'));
@@ -11006,13 +10999,6 @@ function NkModal(_a) {
         React.createElement(Modal$1.Body, null, data.body),
         React.createElement(Modal$1.Footer, null,
             data.buttons.hasNegativeButton && React.createElement(Button, { variant: "secondary", onClick: function () {
-                    // if (this.props.responseHandler) {
-                    //     this.props.responseHandler(null, () => {
-                    //         this.props.modal.closeModal();
-                    //     });
-                    // } else {
-                    //     this.props.modal.closeModal();
-                    // }
                     if (data.type === 'confirm') {
                         data.resolve(false);
                     }
@@ -11022,13 +11008,6 @@ function NkModal(_a) {
                     setShow(false);
                 } }, data.buttons.negativeLabel || 'Cancel'),
             React.createElement(Button, { variant: data.buttons.positiveWarning ? "warning" : "primary", onClick: function () {
-                    // if (this.props.responseHandler) {
-                    //     this.props.responseHandler(this.state.value, () => {
-                    //         this.props.modal.closeModal();
-                    //     });
-                    // } else {
-                    //     this.props.modal.closeModal();
-                    // }
                     if (data.type === 'confirm') {
                         data.resolve(true);
                     }
@@ -11046,9 +11025,7 @@ var NkContainer = /** @class */ (function (_super) {
     }
     NkContainer.prototype.render = function () {
         return (React.createElement("div", null,
-            React.createElement(NkRedirect, { ref: function (data) {
-                    NkReactUtils$1.setRedirect(data);
-                } }),
+            React.createElement(NkRedirect, null),
             this.props.requireLocation &&
                 React.createElement(LocationLoader, { onSuccess: function (position) {
                         NkReactUtils$1.setLocation(position.coords.latitude, position.coords.longitude, position.coords);
@@ -11065,12 +11042,8 @@ var NkContainer = /** @class */ (function (_super) {
                     position: 'relative'
                 } },
                 this.props.children,
-                React.createElement(NkToastPanel, { ref: function (data) {
-                        NkReactUtils$1.setToastPanel(data);
-                    } }),
-                React.createElement(NkModal, { ref: function (data) {
-                        NkReactUtils$1.setModal(data);
-                    } }))));
+                React.createElement(NkToastPanel, null),
+                React.createElement(NkModal, null))));
     };
     return NkContainer;
 }(Component));
