@@ -10602,6 +10602,13 @@ var NkReactUtils = /** @class */ (function () {
 }());
 var NkReactUtils$1 = new NkReactUtils();
 
+
+
+var index$2 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    NkReactUtils: NkReactUtils$1
+});
+
 function NkToast(_a) {
     var title = _a.title, body = _a.body, disappearIn = _a.disappearIn;
     var _b = React__default.useState(true), show = _b[0], setShow = _b[1];
@@ -10627,7 +10634,7 @@ function NkToastPanel(_a) {
     }, []);
     React__default.useEffect(function () {
         console.log('NkToastPanel ref trouble', ref);
-        ref && ref({
+        var callback = {
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
                 var _toastList = toastList.filter(function (t) { return t.disappearIn > ctime; });
@@ -10637,7 +10644,9 @@ function NkToastPanel(_a) {
                 });
                 setToastList(_toastList);
             }
-        });
+        };
+        ref && ref(callback);
+        NkReactUtils$1.setToastPanel(callback);
     }, [ref]);
     return (React__default.createElement("div", { style: {
             position: 'absolute',
@@ -10871,11 +10880,13 @@ function NkRedirect(_a) {
     var ref = _a.ref;
     var _b = React__default.useState(null), redirect = _b[0], setRedirect = _b[1];
     React__default.useEffect(function () {
-        ref && ref({
+        var callback = {
             redirect: function (path) {
                 setRedirect(path);
             }
-        });
+        };
+        ref && ref(callback);
+        NkReactUtils$1.setRedirect(callback);
     }, [ref]);
     return redirect ? React__default.createElement(Redirect, { to: redirect, push: true }) : React__default.createElement("span", null);
 }
@@ -10947,7 +10958,7 @@ function NkModal(_a) {
     }), data = _c[0], setData = _c[1];
     var _d = React__default.useState(null), value = _d[0], setValue = _d[1];
     React__default.useEffect(function () {
-        ref && ref({
+        var callback = {
             prompt: function (data) {
                 var promise = new Promise(function (resolve, reject) {
                     setData({
@@ -10984,7 +10995,9 @@ function NkModal(_a) {
                 });
                 return promise;
             }
-        });
+        };
+        ref && ref(callback);
+        NkReactUtils$1.setModal(callback);
     }, [ref]);
     return (React__default.createElement(Modal$1, { show: show, onClose: function () {
             if (data.type === 'confirm') {
@@ -27874,20 +27887,13 @@ var MyForm = /** @class */ (function (_super) {
 
 
 
-var index$2 = /*#__PURE__*/Object.freeze({
+var index$3 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Commons: index$1,
     NkContainer: NkContainer,
     NkForm: MyForm
 });
 
-
-
-var index$3 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    NkReactUtils: NkReactUtils$1
-});
-
-exports.Components = index$2;
-exports.Utils = index$3;
+exports.Components = index$3;
+exports.Utils = index$2;
 //# sourceMappingURL=index.js.map

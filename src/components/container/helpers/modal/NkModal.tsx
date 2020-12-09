@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import { NkReactUtils } from '../../../../utils';
 import NkSimpleInput from '../../../form/elements/NkSimpleInput'
 
 interface IModalOperation {
@@ -41,7 +42,7 @@ export default function NkModal(this: any, { ref }: {
 
     React.useEffect(() => {
 
-        ref && ref({
+        const callback: NkModalRef = {
             prompt: (data) => {
                 const promise = new Promise<string | null>((resolve, reject) => {
 
@@ -91,7 +92,11 @@ export default function NkModal(this: any, { ref }: {
 
                 return promise;
             }
-        });
+        };
+
+        ref && ref(callback);
+
+        NkReactUtils.setModal(callback);
     }, [ref])
 
     return (

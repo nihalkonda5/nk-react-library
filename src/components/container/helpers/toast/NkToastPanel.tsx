@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { NkReactUtils } from '../../../../utils';
 import NkToast from './NkToast';
 
 export interface NkToastPanelRef {
@@ -25,7 +26,7 @@ export default function NkToastPanel({ ref }: {
 
     React.useEffect(() => {
         console.log('NkToastPanel ref trouble', ref)
-        ref && ref({
+        const callback: NkToastPanelRef = {
             addToast: (title: string, body: string) => {
                 const ctime = new Date().getTime();
                 const _toastList = toastList.filter((t) => t.disappearIn > ctime);
@@ -34,7 +35,10 @@ export default function NkToastPanel({ ref }: {
                 })
                 setToastList(_toastList);
             }
-        });
+        };
+        ref && ref(callback);
+
+        NkReactUtils.setToastPanel(callback);
     }, [ref])
 
     return (
