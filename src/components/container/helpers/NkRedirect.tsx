@@ -22,5 +22,5 @@ export default function NkRedirect() {
 
     }, [])
 
-    return redirect ? <Redirect to={redirect} push /> : <span />
+    return redirect ? <Redirect to={redirect} /> : <span />
 }

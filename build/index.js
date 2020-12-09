@@ -10890,7 +10890,7 @@ function NkRedirect() {
         };
         NkReactUtils$1.setRedirect(callback);
     }, []);
-    return redirect ? React__default.createElement(Redirect, { to: redirect, push: true }) : React__default.createElement("span", null);
+    return redirect ? React__default.createElement(Redirect, { to: redirect }) : React__default.createElement("span", null);
 }
 
 function styleInject(css, ref) {
