@@ -12,7 +12,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'react-quill/dist/quill.snow.css';
 import '../../css/quill.css';
 import NkModal from './helpers/modal/NkModal';
-import { BrowserRouter } from 'react-router-dom';
 
 export default class NkContainer extends Component<{
     headerComponent: JSX.Element,
@@ -21,7 +20,7 @@ export default class NkContainer extends Component<{
 
     render() {
         return (
-            <BrowserRouter>
+            <>
                 <NkRedirect />
                 {
                     this.props.requireLocation &&
@@ -44,7 +43,7 @@ export default class NkContainer extends Component<{
                     <NkToastPanel />
                     <NkModal />
                 </Container>
-            </BrowserRouter>
+            </>
         )
     }
 }
