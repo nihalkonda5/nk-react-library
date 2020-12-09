@@ -9,6 +9,7 @@ export interface NkToastPanelRef {
 export default function NkToastPanel({ ref }: {
     ref(data: NkToastPanelRef): any
 }) {
+    console.log('NkToastPanel ref trouble', ref)
     const [toastList, setToastList] = React.useState<{
         title: string,
         body: string,

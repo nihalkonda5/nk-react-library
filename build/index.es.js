@@ -10610,6 +10610,7 @@ function NkToast(_a) {
 
 function NkToastPanel(_a) {
     var ref = _a.ref;
+    console.log('NkToastPanel ref trouble', ref);
     var _b = React.useState([]), toastList = _b[0], setToastList = _b[1];
     var _c = React.useState(0), scrollY = _c[0], setScrollY = _c[1];
     React.useEffect(function () {
