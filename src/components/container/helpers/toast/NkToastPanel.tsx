@@ -20,6 +20,7 @@ export default function NkToastPanel({ ref }: {
         window.addEventListener('scroll', () => {
             setScrollY(window.scrollY);
         })
+        console.log('NkToastPanel ref trouble', ref)
         ref({
             addToast: (title: string, body: string) => {
                 const ctime = new Date().getTime();

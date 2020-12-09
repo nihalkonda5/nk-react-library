@@ -10623,6 +10623,7 @@ function NkToastPanel(_a) {
         window.addEventListener('scroll', function () {
             setScrollY(window.scrollY);
         });
+        console.log('NkToastPanel ref trouble', ref);
         ref({
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
