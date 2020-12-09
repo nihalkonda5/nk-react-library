@@ -3,7 +3,7 @@ import React from 'react'
 export default function NkImage({
   src,
   alt,
-  _style,
+  style,
   errorSrc,
   height,
   width,
@@ -13,7 +13,7 @@ export default function NkImage({
 }: {
   src: string
   alt?: string
-  _style?: React.CSSProperties
+  style?: React.CSSProperties
   height?: number
   width?: number
   circle?: boolean
@@ -23,30 +23,30 @@ export default function NkImage({
 }) {
   const [error, setError] = React.useState(false)
 
-  const [style, setStyle] = React.useState<React.CSSProperties>(_style || {})
+  const [_style, setStyle] = React.useState<React.CSSProperties>({ ...style } || {})
 
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 })
 
   React.useEffect(() => {
-    const _style = style || {}
+    const __style = { ..._style };
 
-    _style.height = _style.height || height || 200
-    _style.width = _style.width || width || 200
-    _style.objectFit = _style.objectFit || 'contain'
-    _style.backgroundColor = _style.backgroundColor || 'white'
-    _style.margin = _style.margin || margin || 5
+    __style.height = _style.height || height || 200
+    __style.width = _style.width || width || 200
+    __style.objectFit = _style.objectFit || 'contain'
+    __style.backgroundColor = _style.backgroundColor || 'white'
+    __style.margin = _style.margin || margin || 5
 
     if (circle) {
-      _style.borderRadius = '50%'
-      _style.objectFit = 'cover'
+      __style.borderRadius = '50%'
+      __style.objectFit = 'cover'
     }
 
     if (border) {
-      _style.border = dimensions.width / 40 + 'px white solid'
-      _style.boxShadow = '0 0 5px #444'
+      __style.border = dimensions.width / 40 + 'px white solid'
+      __style.boxShadow = '0 0 5px #444'
     }
 
-    setStyle(_style)
+    setStyle(__style)
   }, [dimensions])
 
   if (error) {
@@ -57,7 +57,7 @@ export default function NkImage({
 
   return (
     <img
-      style={style}
+      style={_style}
       src={src}
       alt={alt || 'Basic Image'}
       onError={() => {

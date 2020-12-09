@@ -110,9 +110,9 @@ export default function NkModal() {
             <Modal.Header closeButton>
                 <Modal.Title>{data.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            {data.body && <Modal.Body>
                 {data.body}
-            </Modal.Body>
+            </Modal.Body>}
             <Modal.Footer>
                 {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={() => {
                     if (data.type === 'confirm') {

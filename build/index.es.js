@@ -7369,33 +7369,33 @@ function NkCard(_a) {
 }
 
 function NkImage(_a) {
-    var src = _a.src, alt = _a.alt, _style = _a._style, errorSrc = _a.errorSrc, height = _a.height, width = _a.width, circle = _a.circle, border = _a.border, margin = _a.margin;
+    var src = _a.src, alt = _a.alt, style = _a.style, errorSrc = _a.errorSrc, height = _a.height, width = _a.width, circle = _a.circle, border = _a.border, margin = _a.margin;
     var _b = React.useState(false), error = _b[0], setError = _b[1];
-    var _c = React.useState(_style || {}), style = _c[0], setStyle = _c[1];
+    var _c = React.useState(__assign({}, style) || {}), _style = _c[0], setStyle = _c[1];
     var _d = React.useState({ width: 0, height: 0 }), dimensions = _d[0], setDimensions = _d[1];
     React.useEffect(function () {
-        var _style = style || {};
-        _style.height = _style.height || height || 200;
-        _style.width = _style.width || width || 200;
-        _style.objectFit = _style.objectFit || 'contain';
-        _style.backgroundColor = _style.backgroundColor || 'white';
-        _style.margin = _style.margin || margin || 5;
+        var __style = __assign({}, _style);
+        __style.height = _style.height || height || 200;
+        __style.width = _style.width || width || 200;
+        __style.objectFit = _style.objectFit || 'contain';
+        __style.backgroundColor = _style.backgroundColor || 'white';
+        __style.margin = _style.margin || margin || 5;
         if (circle) {
-            _style.borderRadius = '50%';
-            _style.objectFit = 'cover';
+            __style.borderRadius = '50%';
+            __style.objectFit = 'cover';
         }
         if (border) {
-            _style.border = dimensions.width / 40 + 'px white solid';
-            _style.boxShadow = '0 0 5px #444';
+            __style.border = dimensions.width / 40 + 'px white solid';
+            __style.boxShadow = '0 0 5px #444';
         }
-        setStyle(_style);
+        setStyle(__style);
     }, [dimensions]);
     if (error) {
         src =
             errorSrc ||
                 'https://i.pinimg.com/originals/eb/4f/f5/eb4ff53de5c19dddcc25704418ebd9aa.png';
     }
-    return (React.createElement("img", { style: style, src: src, alt: alt || 'Basic Image', onError: function () {
+    return (React.createElement("img", { style: _style, src: src, alt: alt || 'Basic Image', onError: function () {
             setError(true);
         }, onLoad: function (event) {
             setDimensions({
@@ -11007,7 +11007,7 @@ function NkModal() {
         } },
         React.createElement(Modal$1.Header, { closeButton: true },
             React.createElement(Modal$1.Title, null, data.title)),
-        React.createElement(Modal$1.Body, null, data.body),
+        data.body && React.createElement(Modal$1.Body, null, data.body),
         React.createElement(Modal$1.Footer, null,
             data.buttons.hasNegativeButton && React.createElement(Button, { variant: "secondary", onClick: function () {
                     if (data.type === 'confirm') {
