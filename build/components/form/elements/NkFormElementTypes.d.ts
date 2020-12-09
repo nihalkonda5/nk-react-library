@@ -12,5 +12,6 @@ interface config {
     valueChanged?(id: string, value: any): any;
     liveSuggestions?: Function;
     formButtonClicked?: Function;
+    customComponent?(c: config): JSX.Element;
 }
 export type { config };

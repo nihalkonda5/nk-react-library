@@ -19,6 +19,9 @@ export default function NkFormElement({
             return <SimpleButton {...elementConfig} />
         case 'submit':
             return <SubmitButton {...elementConfig} />
+        case 'custom':
+            //@ts-ignore
+            return <elementConfig.customComponent {...elementConfig} />;
         default:
             return <SimpleInput {...elementConfig} />
     }

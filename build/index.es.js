@@ -27951,6 +27951,9 @@ function NkFormElement(_a) {
             return React.createElement(NkSimpleButton, __assign({}, elementConfig));
         case 'submit':
             return React.createElement(NkSubmitButton, __assign({}, elementConfig));
+        case 'custom':
+            //@ts-ignore
+            return React.createElement(elementConfig.customComponent, __assign({}, elementConfig));
         default:
             return React.createElement(NkSimpleInput, __assign({}, elementConfig));
     }
