@@ -20,6 +20,7 @@ export interface NkModalRef {
 }
 
 export default function NkModal() {
+    console.log('NkModal rendering')
     const [show, setShow] = React.useState(false);
 
     const [data, setData] = React.useState({
@@ -39,9 +40,10 @@ export default function NkModal() {
     const [value, setValue] = React.useState(null);
 
     React.useEffect(() => {
-
+        console.log('NkModal useEffect []')
         const callback: NkModalRef = {
             prompt: (data) => {
+                setShow(true);
                 const promise = new Promise<string | null>((resolve, reject) => {
 
                     setData({
@@ -70,6 +72,7 @@ export default function NkModal() {
                 return promise;
             },
             confirm: (data) => {
+                setShow(true);
                 const promise = new Promise<boolean | null>((resolve, reject) => {
 
                     setData({

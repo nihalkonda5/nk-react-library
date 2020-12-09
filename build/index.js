@@ -10623,14 +10623,14 @@ function NkToast(_a) {
 }
 
 function NkToastPanel() {
-    console.log('NkToastPanel ref trouble');
+    console.log('NkToastPanel rendering');
     var _a = React__default.useState([]), toastList = _a[0], setToastList = _a[1];
     var _b = React__default.useState(0), scrollY = _b[0], setScrollY = _b[1];
     React__default.useEffect(function () {
+        console.log('NkToastPanel useEffect []');
         window.addEventListener('scroll', function () {
             setScrollY(window.scrollY);
         });
-        console.log('NkToastPanel ref trouble');
         var callback = {
             addToast: function (title, body) {
                 var ctime = new Date().getTime();
@@ -10936,6 +10936,7 @@ function NkSimpleInput(_a) {
 }
 
 function NkModal() {
+    console.log('NkModal rendering');
     var _a = React__default.useState(false), show = _a[0], setShow = _a[1];
     var _b = React__default.useState({
         title: '',
@@ -10952,8 +10953,10 @@ function NkModal() {
     }), data = _b[0], setData = _b[1];
     var _c = React__default.useState(null), value = _c[0], setValue = _c[1];
     React__default.useEffect(function () {
+        console.log('NkModal useEffect []');
         var callback = {
             prompt: function (data) {
+                setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
                         type: 'prompt',
@@ -10972,6 +10975,7 @@ function NkModal() {
                 return promise;
             },
             confirm: function (data) {
+                setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
                         type: 'confirm',
