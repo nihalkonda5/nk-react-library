@@ -11035,7 +11035,7 @@ var NkContainer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NkContainer.prototype.render = function () {
-        return (React.createElement("div", null,
+        return (React.createElement(BrowserRouter, null,
             React.createElement(NkRedirect, null),
             this.props.requireLocation &&
                 React.createElement(LocationLoader, { onSuccess: function (position) {
