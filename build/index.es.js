@@ -25303,6 +25303,16 @@ var NkRichTextEditor = /** @class */ (function (_super) {
     return NkRichTextEditor;
 }(Component));
 
+function NkDropdown(_a) {
+    var id = _a.id, valueList = _a.valueList, defaultValue = _a.defaultValue, required = _a.required, valueChanged = _a.valueChanged;
+    return (React.createElement(FormImpl.Group, { style: {
+            maxWidth: 600
+        }, controlId: id },
+        React.createElement(FormImpl.Control, { style: { maxWidth: 600 }, id: id, as: "select", defaultValue: defaultValue, required: required || false, onChange: function (event) {
+                valueChanged && valueChanged(id, event.target.value);
+            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value }, v.label); }))));
+}
+
 function NkFormElement(_a) {
     var elementConfig = _a.elementConfig;
     switch (elementConfig.type) {
@@ -25312,6 +25322,8 @@ function NkFormElement(_a) {
             return React.createElement(NkSimpleButton, __assign({}, elementConfig));
         case 'submit':
             return React.createElement(NkSubmitButton, __assign({}, elementConfig));
+        case 'select':
+            return React.createElement(NkDropdown, __assign({}, elementConfig));
         case 'custom':
             //@ts-ignore
             return React.createElement(elementConfig.customComponent, __assign({}, elementConfig));
@@ -25388,7 +25400,8 @@ var index$3 = /*#__PURE__*/Object.freeze({
     NkRichTextEditor: NkRichTextEditor,
     NkSimpleButton: NkSimpleButton,
     NkSimpleInput: NkSimpleInput,
-    NkSubmitButton: NkSubmitButton
+    NkSubmitButton: NkSubmitButton,
+    NkDropdown: NkDropdown
 });
 
 

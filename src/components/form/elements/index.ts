@@ -5,3 +5,4 @@ export { default as NkRichTextEditor } from './NkRichTextEditor';
 export { default as NkSimpleButton } from './NkSimpleButton';
 export { default as NkSimpleInput } from './NkSimpleInput';
 export { default as NkSubmitButton } from './NkSubmitButton';
+export { default as NkDropdown } from './NkDropdown';

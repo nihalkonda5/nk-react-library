@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { config } from './NkFormElementTypes'
-import SubmitButton from './NkSubmitButton'
-import SimpleInput from './NkSimpleInput'
-import SimpleButton from './NkSimpleButton'
-import MyRichTextEditor from './NkRichTextEditor'
+import NkSubmitButton from './NkSubmitButton'
+import NkSimpleInput from './NkSimpleInput'
+import NkSimpleButton from './NkSimpleButton'
+import NkRichTextEditor from './NkRichTextEditor'
+import NkDropdown from './NkDropdown'
 
 export default function NkFormElement({
     elementConfig
@@ -14,15 +15,17 @@ export default function NkFormElement({
 }) {
     switch (elementConfig.type) {
         case 'rich-text':
-            return <MyRichTextEditor {...elementConfig} />
+            return <NkRichTextEditor {...elementConfig} />
         case 'button':
-            return <SimpleButton {...elementConfig} />
+            return <NkSimpleButton {...elementConfig} />
         case 'submit':
-            return <SubmitButton {...elementConfig} />
+            return <NkSubmitButton {...elementConfig} />
+        case 'select':
+            return <NkDropdown {...elementConfig} />
         case 'custom':
             //@ts-ignore
             return <elementConfig.customComponent {...elementConfig} />;
         default:
-            return <SimpleInput {...elementConfig} />
+            return <NkSimpleInput {...elementConfig} />
     }
 }
