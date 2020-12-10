@@ -25310,7 +25310,7 @@ function NkDropdown(_a) {
         }, controlId: id },
         React.createElement(FormImpl.Control, { style: { maxWidth: 600 }, id: id, as: "select", defaultValue: defaultValue, required: required || false, onChange: function (event) {
                 valueChanged && valueChanged(id, event.target.value);
-            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value }, v.label); }))));
+            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value, selected: v.value === defaultValue }, v.label); }))));
 }
 
 function NkFormElement(_a) {
