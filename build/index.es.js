@@ -4832,14 +4832,94 @@ function NkRichTextContainer(_a) {
     return (React.createElement("div", { className: 'quill ql-editor ql-container', dangerouslySetInnerHTML: { __html: html } }));
 }
 
+var NkReactUtils = /** @class */ (function () {
+    function NkReactUtils() {
+    }
+    NkReactUtils.prototype.setToastPanel = function (tp) {
+        this.ToastPanel = tp;
+    };
+    NkReactUtils.prototype.setLocation = function (latitude, longitude, raw) {
+        this.location = { latitude: latitude, longitude: longitude, raw: raw };
+    };
+    NkReactUtils.prototype.setRedirect = function (rd) {
+        this.Redirect = rd;
+    };
+    NkReactUtils.prototype.setModal = function (md) {
+        this.Modal = md;
+    };
+    return NkReactUtils;
+}());
+var NkReactUtils$1 = new NkReactUtils();
+
+var NkStateManagerUtils = /** @class */ (function () {
+    function NkStateManagerUtils() {
+        this.state = {};
+        this.localStorageKey = 'NkStateManagerUtils';
+    }
+    NkStateManagerUtils.prototype.getLocalStorageKey = function () {
+        this.localStorageKey;
+    };
+    NkStateManagerUtils.prototype.setLocalStorageKey = function (key) {
+        this.localStorageKey = key;
+    };
+    NkStateManagerUtils.prototype.loadState = function () {
+        try {
+            this.state = JSON.parse(window.localStorage.getItem(this.localStorageKey) || '{}');
+        }
+        catch (error) {
+            this.state = {};
+        }
+    };
+    NkStateManagerUtils.prototype.backupState = function () {
+        try {
+            window.localStorage.setItem(this.localStorageKey, JSON.stringify(this.state));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    NkStateManagerUtils.prototype.getStateValue = function (key, defaultValue) {
+        try {
+            if (this.state[key] !== null || this.state[key] !== undefined) {
+                return this.state[key];
+            }
+        }
+        catch (error) {
+            console.error(error);
+        }
+        return defaultValue;
+    };
+    NkStateManagerUtils.prototype.setStateValue = function (key, value) {
+        this.state[key] = value;
+        this.backupState();
+    };
+    return NkStateManagerUtils;
+}());
+var NkStateManagerUtils$1 = new NkStateManagerUtils();
+
 
 
 var index = /*#__PURE__*/Object.freeze({
     __proto__: null,
+    NkReactUtils: NkReactUtils$1,
+    NkStateManagerUtils: NkStateManagerUtils$1
+});
+
+function NkLocalizeText(_a) {
+    var textMap = _a.textMap, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
+    var language = NkStateManagerUtils$1.getStateValue(languageStateKey, defaultLanguage);
+    return React.createElement(React.Fragment, null, textMap[language] || textMap[defaultLanguage] || textMap[Object.keys(textMap)[0]]);
+}
+
+
+
+var index$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
     NkCard: NkCard,
     NkImage: NkImage,
     NkPagination: MyPagination,
-    NkRichTextContainer: NkRichTextContainer
+    NkRichTextContainer: NkRichTextContainer,
+    NkLocalizeText: NkLocalizeText
 });
 
 var bind = function bind(fn, thisArg) {
@@ -7931,79 +8011,6 @@ var default_1 = axios;
 axios_1.default = default_1;
 
 var axios$1 = axios_1;
-
-var NkReactUtils = /** @class */ (function () {
-    function NkReactUtils() {
-    }
-    NkReactUtils.prototype.setToastPanel = function (tp) {
-        this.ToastPanel = tp;
-    };
-    NkReactUtils.prototype.setLocation = function (latitude, longitude, raw) {
-        this.location = { latitude: latitude, longitude: longitude, raw: raw };
-    };
-    NkReactUtils.prototype.setRedirect = function (rd) {
-        this.Redirect = rd;
-    };
-    NkReactUtils.prototype.setModal = function (md) {
-        this.Modal = md;
-    };
-    return NkReactUtils;
-}());
-var NkReactUtils$1 = new NkReactUtils();
-
-var NkStateManagerUtils = /** @class */ (function () {
-    function NkStateManagerUtils() {
-        this.state = {};
-        this.localStorageKey = 'NkStateManagerUtils';
-    }
-    NkStateManagerUtils.prototype.getLocalStorageKey = function () {
-        this.localStorageKey;
-    };
-    NkStateManagerUtils.prototype.setLocalStorageKey = function (key) {
-        this.localStorageKey = key;
-    };
-    NkStateManagerUtils.prototype.loadState = function () {
-        try {
-            this.state = JSON.parse(window.localStorage.getItem(this.localStorageKey) || '{}');
-        }
-        catch (error) {
-            this.state = {};
-        }
-    };
-    NkStateManagerUtils.prototype.backupState = function () {
-        try {
-            window.localStorage.setItem(this.localStorageKey, JSON.stringify(this.state));
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-    NkStateManagerUtils.prototype.getStateValue = function (key, defaultValue) {
-        try {
-            if (this.state[key] !== null || this.state[key] !== undefined) {
-                return this.state[key];
-            }
-        }
-        catch (error) {
-            console.error(error);
-        }
-        return defaultValue;
-    };
-    NkStateManagerUtils.prototype.setStateValue = function (key, value) {
-        this.state[key] = value;
-        this.backupState();
-    };
-    return NkStateManagerUtils;
-}());
-var NkStateManagerUtils$1 = new NkStateManagerUtils();
-
-
-
-var index$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    NkReactUtils: NkReactUtils$1,
-    NkStateManagerUtils: NkStateManagerUtils$1
-});
 
 function NkToast(_a) {
     var title = _a.title, body = _a.body, disappearIn = _a.disappearIn;
@@ -25323,12 +25330,12 @@ var index$3 = /*#__PURE__*/Object.freeze({
 
 var index$4 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    Commons: index,
+    Commons: index$1,
     NkContainer: NkContainer,
     NkContainerHelpers: index$2,
     NkForm: MyForm,
     NkFormElements: index$3
 });
 
-export { index$4 as Components, index$1 as Utils };
+export { index$4 as Components, index as Utils };
 //# sourceMappingURL=index.es.js.map
