@@ -10,18 +10,20 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'react-quill/dist/quill.snow.css';
 import '../../css/quill.css';
 import NkModal from './helpers/modal/NkModal';
-import { NkStateManagerUtils } from '../../utils';
+import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils';
 
-export default function NkContainer({ headerComponent, requireLocation, stateKey, children }: {
+export default function NkContainer({ headerComponent, requireLocation, stateKey, children, dictionary }: {
     headerComponent: JSX.Element,
     requireLocation?: boolean,
     stateKey?: string,
-    children: any
+    children: any,
+    dictionary?: { [key: string]: { [key: string]: string } }
 }) {
 
     React.useEffect(() => {
         stateKey && NkStateManagerUtils.setLocalStorageKey(stateKey);
         NkStateManagerUtils.loadState();
+        dictionary && NkDictionaryUtils.setDictionary(dictionary);
     }, [])
 
     return (

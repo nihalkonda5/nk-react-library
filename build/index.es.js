@@ -8522,10 +8522,11 @@ function NkModal() {
 }
 
 function NkContainer(_a) {
-    var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children;
+    var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary;
     React.useEffect(function () {
         stateKey && NkStateManagerUtils$1.setLocalStorageKey(stateKey);
         NkStateManagerUtils$1.loadState();
+        dictionary && NkDictionaryUtils$1.setDictionary(dictionary);
     }, []);
     return (React.createElement(React.Fragment, null,
         requireLocation &&
