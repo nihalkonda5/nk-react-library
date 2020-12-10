@@ -1,7 +1,5 @@
-export default function NkLocalizeText({ textMap, languageStateKey, defaultLanguage }: {
-    textMap: {
-        [key: string]: string;
-    };
+export default function NkLocalizeText({ text, languageStateKey, defaultLanguage }: {
+    text: string;
     languageStateKey?: string;
     defaultLanguage?: string;
 }): JSX.Element;

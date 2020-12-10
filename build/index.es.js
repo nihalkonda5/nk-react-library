@@ -4956,24 +4956,54 @@ var NkStateManagerUtils = /** @class */ (function () {
 }());
 var NkStateManagerUtils$1 = new NkStateManagerUtils();
 
+var NkDictionaryUtils = /** @class */ (function () {
+    function NkDictionaryUtils() {
+        this.dictionary = {};
+        this.dictionaryListeners = [];
+    }
+    NkDictionaryUtils.prototype.addDictionaryListener = function (func) {
+        this.dictionaryListeners.push(func);
+    };
+    NkDictionaryUtils.prototype.setDictionary = function (dict) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.dictionary = dict;
+                this.dictionaryListeners.forEach(function (d) { return d(); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    NkDictionaryUtils.prototype.getDictionaryValue = function (source, language) {
+        return this.dictionary[source] ? (this.dictionary[source][language] || source) : source;
+    };
+    return NkDictionaryUtils;
+}());
+var NkDictionaryUtils$1 = new NkDictionaryUtils();
+
 
 
 var index = /*#__PURE__*/Object.freeze({
     __proto__: null,
     NkReactUtils: NkReactUtils$1,
-    NkStateManagerUtils: NkStateManagerUtils$1
+    NkStateManagerUtils: NkStateManagerUtils$1,
+    NkDictionaryUtils: NkDictionaryUtils$1
 });
 
 function NkLocalizeText(_a) {
-    var textMap = _a.textMap, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
+    var text = _a.text, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
     var _d = React.useState(NkStateManagerUtils$1.getStateValue(languageStateKey, defaultLanguage)), language = _d[0], setLanguage = _d[1];
+    var _e = React.useState(0), reload = _e[0], setReload = _e[1];
     React.useEffect(function () {
         NkStateManagerUtils$1.addStateListener(languageStateKey, function (state, value) {
             console.log(state, value);
             setLanguage(value);
         });
+        NkDictionaryUtils$1.addDictionaryListener(function () {
+            setReload(new Date().getTime());
+        });
     }, []);
-    return React.createElement(React.Fragment, null, textMap[language] || textMap[defaultLanguage] || textMap[Object.keys(textMap)[0]]);
+    console.log(reload);
+    return React.createElement(React.Fragment, null, NkDictionaryUtils$1.getDictionaryValue(text, language));
 }
 
 

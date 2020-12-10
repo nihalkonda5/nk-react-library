@@ -1,24 +1,31 @@
 import React from 'react'
-import { NkStateManagerUtils } from '../../utils'
+import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils'
 
 export default function NkLocalizeText({
-    textMap,
+    text,
     languageStateKey = 'language',
     defaultLanguage = 'english'
 }: {
-    textMap: { [key: string]: string },
+    text: string,
     languageStateKey?: string,
     defaultLanguage?: string
 }) {
 
     const [language, setLanguage] = React.useState(NkStateManagerUtils.getStateValue(languageStateKey, defaultLanguage));
 
+    const [reload, setReload] = React.useState(0);
+
     React.useEffect(() => {
         NkStateManagerUtils.addStateListener(languageStateKey, (state: string, value: any) => {
             console.log(state, value);
             setLanguage(value);
         })
+        NkDictionaryUtils.addDictionaryListener(() => {
+            setReload(new Date().getTime());
+        });
     }, [])
 
-    return <>{textMap[language] || textMap[defaultLanguage] || textMap[Object.keys(textMap)[0]]}</>
+    console.log(reload);
+
+    return <>{NkDictionaryUtils.getDictionaryValue(text, language)}</>
 }
