@@ -10,7 +10,15 @@ export default function NkLocalizeText({
     languageStateKey?: string,
     defaultLanguage?: string
 }) {
-    const language = NkStateManagerUtils.getStateValue(languageStateKey, defaultLanguage);
+
+    const [language, setLanguage] = React.useState(NkStateManagerUtils.getStateValue(languageStateKey, defaultLanguage));
+
+    React.useEffect(() => {
+        NkStateManagerUtils.addStateListener(languageStateKey, (state: string, value: any) => {
+            console.log(state, value);
+            setLanguage(value);
+        })
+    }, [])
 
     return <>{textMap[language] || textMap[defaultLanguage] || textMap[Object.keys(textMap)[0]]}</>
 }

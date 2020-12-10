@@ -1,6 +1,7 @@
-class NkStateManagerUtils {
-    state = {};
 
+class NkStateManagerUtils {
+    state: { [key: string]: any } = {};
+    stateListeners: { [key: string]: ((state: string, value: any) => void)[] } = {};
     localStorageKey = 'NkStateManagerUtils';
 
     getLocalStorageKey() {
@@ -9,6 +10,13 @@ class NkStateManagerUtils {
 
     setLocalStorageKey(key: string) {
         this.localStorageKey = key;
+    }
+
+    addStateListener(key: string, listener: ((state: string, value: any) => void)) {
+        if (!this.stateListeners[key])
+            this.stateListeners[key] = []
+
+        this.stateListeners[key].push(listener);
     }
 
     loadState() {
@@ -38,9 +46,12 @@ class NkStateManagerUtils {
         return defaultValue;
     }
 
-    setStateValue(key: string, value: any) {
+    async setStateValue(key: string, value: any) {
         this.state[key] = value;
         this.backupState();
+        if (this.stateListeners[key]) {
+            this.stateListeners[key].forEach(l => l(key, value));
+        }
     }
 
 }
