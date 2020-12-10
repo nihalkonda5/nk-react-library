@@ -5131,10 +5131,36 @@ var Button = React.forwardRef(function (_ref, ref) {
 Button.displayName = 'Button';
 Button.defaultProps = defaultProps$2;
 
+var defaultProps$3 = {
+  vertical: false,
+  toggle: false,
+  role: 'group'
+};
+var ButtonGroup = React.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      size = _ref.size,
+      toggle = _ref.toggle,
+      vertical = _ref.vertical,
+      className = _ref.className,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      rest = _objectWithoutPropertiesLoose(_ref, ["bsPrefix", "size", "toggle", "vertical", "className", "as"]);
+
+  var prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
+  var baseClass = prefix;
+  if (vertical) baseClass = prefix + "-vertical";
+  return /*#__PURE__*/React.createElement(Component, _extends({}, rest, {
+    ref: ref,
+    className: classnames(className, baseClass, size && prefix + "-" + size, toggle && prefix + "-toggle")
+  }));
+});
+ButtonGroup.displayName = 'ButtonGroup';
+ButtonGroup.defaultProps = defaultProps$3;
+
 var context$1 = React.createContext(null);
 context$1.displayName = 'CardContext';
 
-var defaultProps$3 = {
+var defaultProps$4 = {
   variant: null
 };
 var CardImg = React.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -5153,7 +5179,7 @@ function (_ref, ref) {
   }, props));
 });
 CardImg.displayName = 'CardImg';
-CardImg.defaultProps = defaultProps$3;
+CardImg.defaultProps = defaultProps$4;
 
 var DivStyledAsH5 = divWithClassName('h5');
 var DivStyledAsH6 = divWithClassName('h6');
@@ -5173,7 +5199,7 @@ var CardText = createWithBsPrefix('card-text', {
 var CardHeader = createWithBsPrefix('card-header');
 var CardFooter = createWithBsPrefix('card-footer');
 var CardImgOverlay = createWithBsPrefix('card-img-overlay');
-var defaultProps$4 = {
+var defaultProps$5 = {
   body: false
 };
 var Card = React.forwardRef(function (_ref, ref) {
@@ -5206,7 +5232,7 @@ var Card = React.forwardRef(function (_ref, ref) {
   React.createElement(CardBody, null, children) : children));
 });
 Card.displayName = 'Card';
-Card.defaultProps = defaultProps$4;
+Card.defaultProps = defaultProps$5;
 Card.Img = CardImg;
 Card.Title = CardTitle;
 Card.Subtitle = CardSubtitle;
@@ -5989,7 +6015,7 @@ var FormGroup = React.forwardRef(function (_ref, ref) {
 });
 FormGroup.displayName = 'FormGroup';
 
-var defaultProps$5 = {
+var defaultProps$6 = {
   column: false,
   srOnly: false
 };
@@ -6028,7 +6054,7 @@ var FormLabel = React.forwardRef(function (_ref, ref) {
   );
 });
 FormLabel.displayName = 'FormLabel';
-FormLabel.defaultProps = defaultProps$5;
+FormLabel.defaultProps = defaultProps$6;
 
 var FormText = React.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
 function (_ref, ref) {
@@ -6058,7 +6084,7 @@ Switch$1.Input = FormCheck.Input;
 Switch$1.Label = FormCheck.Label;
 
 var FormRow = createWithBsPrefix('form-row');
-var defaultProps$6 = {
+var defaultProps$7 = {
   inline: false
 };
 var FormImpl = React.forwardRef(function (_ref, ref) {
@@ -6077,7 +6103,7 @@ var FormImpl = React.forwardRef(function (_ref, ref) {
   }));
 });
 FormImpl.displayName = 'Form';
-FormImpl.defaultProps = defaultProps$6;
+FormImpl.defaultProps = defaultProps$7;
 FormImpl.Row = FormRow;
 FormImpl.Group = FormGroup;
 FormImpl.Control = FormControl$1;
@@ -6087,7 +6113,7 @@ FormImpl.Switch = Switch$1;
 FormImpl.Label = FormLabel;
 FormImpl.Text = FormText;
 
-var defaultProps$7 = {
+var defaultProps$8 = {
   fluid: false
 };
 var Container = React.forwardRef(function (_ref, ref) {
@@ -6107,7 +6133,7 @@ var Container = React.forwardRef(function (_ref, ref) {
   }));
 });
 Container.displayName = 'Container';
-Container.defaultProps = defaultProps$7;
+Container.defaultProps = defaultProps$8;
 
 var size;
 function scrollbarSize(recalc) {
@@ -6949,7 +6975,7 @@ ModalDialog.displayName = 'ModalDialog';
 
 var ModalFooter = createWithBsPrefix('modal-footer');
 
-var defaultProps$8 = {
+var defaultProps$9 = {
   closeLabel: 'Close',
   closeButton: false
 };
@@ -6978,7 +7004,7 @@ var ModalHeader = React.forwardRef(function (_ref, ref) {
   }));
 });
 ModalHeader.displayName = 'ModalHeader';
-ModalHeader.defaultProps = defaultProps$8;
+ModalHeader.defaultProps = defaultProps$9;
 
 var DivStyledAsH4 = divWithClassName('h4');
 var ModalTitle = createWithBsPrefix('modal-title', {
@@ -6986,7 +7012,7 @@ var ModalTitle = createWithBsPrefix('modal-title', {
 });
 
 var manager$1;
-var defaultProps$9 = {
+var defaultProps$a = {
   show: false,
   backdrop: true,
   keyboard: true,
@@ -7263,7 +7289,7 @@ var Modal$1 = React.forwardRef(function (_ref, ref) {
   }));
 });
 Modal$1.displayName = 'Modal';
-Modal$1.defaultProps = defaultProps$9;
+Modal$1.defaultProps = defaultProps$a;
 Modal$1.Body = ModalBody;
 Modal$1.Header = ModalHeader;
 Modal$1.Title = ModalTitle;
@@ -7272,7 +7298,7 @@ Modal$1.Dialog = ModalDialog;
 Modal$1.TRANSITION_DURATION = 300;
 Modal$1.BACKDROP_TRANSITION_DURATION = 150;
 
-var defaultProps$a = {
+var defaultProps$b = {
   active: false,
   disabled: false,
   activeLabel: '(current)'
@@ -7301,7 +7327,7 @@ var PageItem = React.forwardRef(function (_ref, ref) {
     className: "sr-only"
   }, activeLabel)));
 });
-PageItem.defaultProps = defaultProps$a;
+PageItem.defaultProps = defaultProps$b;
 PageItem.displayName = 'PageItem';
 
 function createButton(name, defaultValue, label) {
@@ -7364,7 +7390,7 @@ var ToastContext = React.createContext({
   onClose: function onClose() {}
 });
 
-var defaultProps$b = {
+var defaultProps$c = {
   closeLabel: 'Close',
   closeButton: true
 };
@@ -7395,7 +7421,7 @@ var ToastHeader = React.forwardRef(function (_ref, ref) {
   }));
 });
 ToastHeader.displayName = 'ToastHeader';
-ToastHeader.defaultProps = defaultProps$b;
+ToastHeader.defaultProps = defaultProps$c;
 
 var ToastBody = createWithBsPrefix('toast-body');
 
@@ -27989,15 +28015,57 @@ var MyForm = /** @class */ (function (_super) {
     return MyForm;
 }(Component));
 
+function NkButtonGroup(_a) {
+    var id = _a.id, defaultValue = _a.defaultValue, valueChanged = _a.valueChanged, valueList = _a.valueList;
+    var _b = React.useState(defaultValue || { label: '', value: null }), selectedButton = _b[0], setSelectedButton = _b[1];
+    React.useEffect(function () {
+        if (selectedButton.value) {
+            valueChanged && valueChanged(id, selectedButton);
+        }
+    }, [selectedButton]);
+    return (React.createElement(ButtonGroup, { id: id, style: {
+            border: '1px solid #007bff',
+            borderRadius: '0.35rem'
+        } }, valueList && valueList.map(function (_a) {
+        var label = _a.label, value = _a.value;
+        return (React.createElement(Button, { key: label, onClick: function () {
+                if (selectedButton.label !== label)
+                    setSelectedButton({ label: label, value: value });
+            }, variant: label === selectedButton.label ? 'primary' : 'outline-primary', style: {
+                borderColor: 'transparent'
+            } }, label));
+    })));
+}
+
+
+
+var NkFormElementTypes = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});
+
 
 
 var index$4 = /*#__PURE__*/Object.freeze({
     __proto__: null,
+    NkButtonGroup: NkButtonGroup,
+    NkFormElement: NkFormElement,
+    NkFormElementTypes: NkFormElementTypes,
+    NkRichTextEditor: NkRichTextEditor,
+    NkSimpleButton: NkSimpleButton,
+    NkSimpleInput: NkSimpleInput,
+    NkSubmitButton: NkSubmitButton
+});
+
+
+
+var index$5 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
     Commons: index$1,
     NkContainer: NkContainer,
     NkContainerHelpers: index$3,
-    NkForm: MyForm
+    NkForm: MyForm,
+    NkFormElements: index$4
 });
 
-export { index$4 as Components, index$2 as Utils };
+export { index$5 as Components, index$2 as Utils };
 //# sourceMappingURL=index.es.js.map
