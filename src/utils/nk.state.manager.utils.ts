@@ -25,6 +25,13 @@ class NkStateManagerUtils {
         } catch (error) {
             this.state = {};
         }
+        Object.keys(this.stateListeners).forEach(key => {
+            if (this.stateListeners[key]) {
+                const value = this.state[key];
+                if (value !== null || value !== undefined)
+                    this.stateListeners[key].forEach(l => l(key, value));
+            }
+        })
     }
 
     backupState() {

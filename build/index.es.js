@@ -4906,12 +4906,20 @@ var NkStateManagerUtils = /** @class */ (function () {
         this.stateListeners[key].push(listener);
     };
     NkStateManagerUtils.prototype.loadState = function () {
+        var _this = this;
         try {
             this.state = JSON.parse(window.localStorage.getItem(this.localStorageKey) || '{}');
         }
         catch (error) {
             this.state = {};
         }
+        Object.keys(this.stateListeners).forEach(function (key) {
+            if (_this.stateListeners[key]) {
+                var value_1 = _this.state[key];
+                if (value_1 !== null || value_1 !== undefined)
+                    _this.stateListeners[key].forEach(function (l) { return l(key, value_1); });
+            }
+        });
     };
     NkStateManagerUtils.prototype.backupState = function () {
         try {
