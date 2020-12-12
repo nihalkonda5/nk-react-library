@@ -98,38 +98,32 @@ export default function NkModal() {
         NkReactUtils.setModal(callback);
     }, [])
 
-    return (
-        <Modal show={show} onClose={() => {
+    const modalResponse = (primary: boolean | null) => {
+        return () => {
             if (data.type === 'confirm') {
-                data.reject(new Error('Confirm closed'));
+                data.resolve(primary);
             } else if (data.type === 'prompt') {
-                data.reject(new Error('Prompt closed'));
+                data.resolve(primary === null || primary === false ? null : value);
             }
             setShow(false);
-        }}>
-            <Modal.Header closeButton>
+        }
+    }
+
+    return (
+        <Modal show={show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
+            <Modal.Header closeButton onHide={modalResponse(null)}>
                 <Modal.Title>{data.title}</Modal.Title>
             </Modal.Header>
             {data.body && <Modal.Body>
                 {data.body}
             </Modal.Body>}
             <Modal.Footer>
-                {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={() => {
-                    if (data.type === 'confirm') {
-                        data.resolve(false);
-                    } else if (data.type === 'prompt') {
-                        data.resolve(null);
-                    }
-                    setShow(false);
-                }}>{data.buttons.negativeLabel || 'Cancel'}</Button>}
-                <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={() => {
-                    if (data.type === 'confirm') {
-                        data.resolve(true);
-                    } else if (data.type === 'prompt') {
-                        data.resolve(value);
-                    }
-                    setShow(false);
-                }}>{data.buttons.positiveLabel || 'Submit'}</Button>
+                {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={modalResponse(false)}>
+                    {data.buttons.negativeLabel || 'Cancel'}
+                </Button>}
+                <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={modalResponse(true)}>
+                    {data.buttons.positiveLabel || 'Submit'}
+                </Button>
             </Modal.Footer>
         </Modal>
     )

@@ -8495,37 +8495,24 @@ function NkModal() {
         };
         NkReactUtils$1.setModal(callback);
     }, []);
-    return (React__default.createElement(Modal$1, { show: show, onClose: function () {
+    var modalResponse = function (primary) {
+        return function () {
             if (data.type === 'confirm') {
-                data.reject(new Error('Confirm closed'));
+                data.resolve(primary);
             }
             else if (data.type === 'prompt') {
-                data.reject(new Error('Prompt closed'));
+                data.resolve(primary === null || primary === false ? null : value);
             }
             setShow(false);
-        } },
-        React__default.createElement(Modal$1.Header, { closeButton: true },
+        };
+    };
+    return (React__default.createElement(Modal$1, { show: show, onClose: modalResponse(null), onHide: modalResponse(null) },
+        React__default.createElement(Modal$1.Header, { closeButton: true, onHide: modalResponse(null) },
             React__default.createElement(Modal$1.Title, null, data.title)),
         data.body && React__default.createElement(Modal$1.Body, null, data.body),
         React__default.createElement(Modal$1.Footer, null,
-            data.buttons.hasNegativeButton && React__default.createElement(Button, { variant: "secondary", onClick: function () {
-                    if (data.type === 'confirm') {
-                        data.resolve(false);
-                    }
-                    else if (data.type === 'prompt') {
-                        data.resolve(null);
-                    }
-                    setShow(false);
-                } }, data.buttons.negativeLabel || 'Cancel'),
-            React__default.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: function () {
-                    if (data.type === 'confirm') {
-                        data.resolve(true);
-                    }
-                    else if (data.type === 'prompt') {
-                        data.resolve(value);
-                    }
-                    setShow(false);
-                } }, data.buttons.positiveLabel || 'Submit'))));
+            data.buttons.hasNegativeButton && React__default.createElement(Button, { variant: "secondary", onClick: modalResponse(false) }, data.buttons.negativeLabel || 'Cancel'),
+            React__default.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: modalResponse(true) }, data.buttons.positiveLabel || 'Submit'))));
 }
 
 function NkContainer(_a) {
