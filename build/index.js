@@ -8517,7 +8517,7 @@ function NkModal() {
                     }
                     setShow(false);
                 } }, data.buttons.negativeLabel || 'Cancel'),
-            React__default.createElement(Button, { variant: data.buttons.positiveWarning ? "warning" : "primary", onClick: function () {
+            React__default.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: function () {
                     if (data.type === 'confirm') {
                         data.resolve(true);
                     }

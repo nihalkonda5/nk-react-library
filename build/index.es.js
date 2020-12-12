@@ -8510,7 +8510,7 @@ function NkModal() {
                     }
                     setShow(false);
                 } }, data.buttons.negativeLabel || 'Cancel'),
-            React.createElement(Button, { variant: data.buttons.positiveWarning ? "warning" : "primary", onClick: function () {
+            React.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: function () {
                     if (data.type === 'confirm') {
                         data.resolve(true);
                     }

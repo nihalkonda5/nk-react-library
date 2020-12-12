@@ -122,7 +122,7 @@ export default function NkModal() {
                     }
                     setShow(false);
                 }}>{data.buttons.negativeLabel || 'Cancel'}</Button>}
-                <Button variant={data.buttons.positiveWarning ? "warning" : "primary"} onClick={() => {
+                <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={() => {
                     if (data.type === 'confirm') {
                         data.resolve(true);
                     } else if (data.type === 'prompt') {
