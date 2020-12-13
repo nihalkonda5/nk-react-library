@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
+import { NkDropdown } from '../form/elements';
 
 function paginationPattern(selectedPage: number, totalPages: number, padding: number) {
     const items = [];
@@ -32,6 +33,14 @@ function paginationPattern(selectedPage: number, totalPages: number, padding: nu
     items.push(totalPages);
 
     return items;
+}
+
+function arrayRange(lowEnd: number = 1, highEnd: number = 10) {
+    var list = [];
+    for (var i = lowEnd; i <= highEnd; i++) {
+        list.push(i);
+    }
+    return list;
 }
 
 export default function MyPagination({ totalPageCount, selectedPage, pageSelected }: {
@@ -79,6 +88,11 @@ export default function MyPagination({ totalPageCount, selectedPage, pageSelecte
                 <Pagination.Last data-page-value={totalPageCount} onClick={() => {
                     console.log('MyPagination', 'itemClicked', totalPageCount);
                     pageSelected(totalPageCount);
+                }} />
+                <NkDropdown id='select' type='select' defaultValue={`${selectedPage}`} valueList={
+                    arrayRange(1, totalPageCount).map((n: number) => { return { label: `Page ${n}`, value: `${n}` } })
+                } valueChanged={(id, value) => {
+                    pageSelected(value);
                 }} />
             </Pagination>
         </div>

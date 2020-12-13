@@ -55,7 +55,7 @@ export default function NkModal() {
                                 type=''
                                 label={data.description}
                                 defaultValue={data.defaultValue}
-                                valueChanged={(id, value) => { console.log(id, value); setValue(value); }} />
+                                valueChanged={(id, value) => { setValue(value); }} />
                         ),
                         buttons: {
                             hasNegativeButton: true,
