@@ -70,39 +70,35 @@ export default function MyPagination({ totalPageCount, selectedPage, pageSelecte
     }
 
     return (
-
-        <table>
-            <tr>
-                <td>
-                    <Pagination style={{ display: "inline-flex" }}>
-                        <Pagination.First data-page-value={1} onClick={() => {
-                            console.log('MyPagination', 'itemClicked', 1);
-                            pageSelected(1);
-                        }} />
-                        <Pagination.Prev data-page-value={(selectedPage - 1)} disabled={selectedPage === 1} onClick={() => {
-                            console.log('MyPagination', 'itemClicked', selectedPage - 1);
-                            pageSelected(selectedPage - 1);
-                        }} />
-                        {ele}
-                        <Pagination.Next data-page-value={(selectedPage + 1)} disabled={selectedPage === totalPageCount} onClick={() => {
-                            console.log('MyPagination', 'itemClicked', selectedPage + 1);
-                            pageSelected(selectedPage + 1);
-                        }} />
-                        <Pagination.Last data-page-value={totalPageCount} onClick={() => {
-                            console.log('MyPagination', 'itemClicked', totalPageCount);
-                            pageSelected(totalPageCount);
-                        }} style={{ marginRight: 5 }} />
-                    </Pagination>
-                </td>
-                <td style={{ paddingLeft: 10 }}>
-
-                    <NkDropdown id='select' type='select' defaultValue={`${selectedPage}`} valueList={
-                        arrayRange(1, totalPageCount).map((n: number) => { return { label: `Page ${n}`, value: `${n}` } })
-                    } valueChanged={(id, value) => {
-                        pageSelected(value);
+        <>
+            <span style={{ display: 'inline-block' }}>
+                <Pagination style={{ display: "inline-flex" }}>
+                    <Pagination.First data-page-value={1} onClick={() => {
+                        console.log('MyPagination', 'itemClicked', 1);
+                        pageSelected(1);
                     }} />
-                </td>
-            </tr>
-        </table>
+                    <Pagination.Prev data-page-value={(selectedPage - 1)} disabled={selectedPage === 1} onClick={() => {
+                        console.log('MyPagination', 'itemClicked', selectedPage - 1);
+                        pageSelected(selectedPage - 1);
+                    }} />
+                    {ele}
+                    <Pagination.Next data-page-value={(selectedPage + 1)} disabled={selectedPage === totalPageCount} onClick={() => {
+                        console.log('MyPagination', 'itemClicked', selectedPage + 1);
+                        pageSelected(selectedPage + 1);
+                    }} />
+                    <Pagination.Last data-page-value={totalPageCount} onClick={() => {
+                        console.log('MyPagination', 'itemClicked', totalPageCount);
+                        pageSelected(totalPageCount);
+                    }} style={{ marginRight: 5 }} />
+                </Pagination>
+            </span>
+            <span style={{ display: 'inline-block', paddingLeft: 10 }}>
+                <NkDropdown id='select' type='select' defaultValue={`${selectedPage}`} valueList={
+                    arrayRange(1, totalPageCount).map((n: number) => { return { label: `Page ${n}`, value: `${n}` } })
+                } valueChanged={(id, value) => {
+                    pageSelected(value);
+                }} />
+            </span>
+        </>
     )
 }
