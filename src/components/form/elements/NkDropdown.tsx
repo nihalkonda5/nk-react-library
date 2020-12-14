@@ -29,7 +29,17 @@ export default function NkDropdown({
                 }}
             >
                 {
-                    valueList?.map(v => <option value={v.value} selected={v.value === defaultValue}><NkLocalizeText text={v.label} /></option>)
+                    valueList?.map(v =>
+                        <option
+                            value={v.value}
+                            selected={v.value === defaultValue}
+                        >
+                            <NkLocalizeText text={(() => {
+                                console.log('NkDropdown', v.label);
+                                return v.label;
+                            })()} />
+                        </option>
+                    )
                 }
             </Form.Control>
         </Form.Group>

@@ -21607,8 +21607,13 @@ function NkDropdown(_a) {
         }, controlId: id },
         React.createElement(FormImpl.Control, { style: { maxWidth: 600 }, id: id, as: "select", defaultValue: defaultValue, required: required || false, onChange: function (event) {
                 valueChanged && valueChanged(id, event.target.value);
-            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value, selected: v.value === defaultValue },
-            React.createElement(NkLocalizeText, { text: v.label })); }))));
+            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) {
+            return React.createElement("option", { value: v.value, selected: v.value === defaultValue },
+                React.createElement(NkLocalizeText, { text: (function () {
+                        console.log('NkDropdown', v.label);
+                        return v.label;
+                    })() }));
+        }))));
 }
 
 function NkFormElement(_a) {
@@ -21865,17 +21870,20 @@ function NkLocalizeText(_a) {
     var _d = React.useState(NkStateManagerUtils$1.getStateValue(languageStateKey, defaultLanguage)), language = _d[0], setLanguage = _d[1];
     //const [reload, setReload] = React.useState(0);
     var _e = React.useState(NkDictionaryUtils$1.getDictionaryValue(text || '', language) || ''), translatedText = _e[0], setTranslatedText = _e[1];
+    var updateTranslatedText = function () {
+        setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
+    };
     React.useEffect(function () {
         NkStateManagerUtils$1.addStateListener(languageStateKey, function (state, value) {
             console.log(state, value);
             setLanguage(value);
         });
         NkDictionaryUtils$1.addDictionaryListener(function () {
-            setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
+            updateTranslatedText();
         });
     }, []);
     React.useEffect(function () {
-        setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
+        updateTranslatedText();
     }, [language]);
     //console.log(reload);
     return React.createElement(React.Fragment, null, translatedText);

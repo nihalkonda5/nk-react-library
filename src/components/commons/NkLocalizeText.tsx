@@ -24,24 +24,25 @@ export default function NkLocalizeText({
 
     const [translatedText, setTranslatedText] = React.useState(NkDictionaryUtils.getDictionaryValue(text || '', language) || '');
 
+    const updateTranslatedText = () => {
+        setTranslatedText(embedMap(
+            NkDictionaryUtils.getDictionaryValue(text || '', language),
+            map || {}
+        ))
+    };
+
     React.useEffect(() => {
         NkStateManagerUtils.addStateListener(languageStateKey, (state: string, value: any) => {
             console.log(state, value);
             setLanguage(value);
         })
         NkDictionaryUtils.addDictionaryListener(() => {
-            setTranslatedText(embedMap(
-                NkDictionaryUtils.getDictionaryValue(text || '', language),
-                map || {}
-            ))
+            updateTranslatedText();
         });
     }, [])
 
     React.useEffect(() => {
-        setTranslatedText(embedMap(
-            NkDictionaryUtils.getDictionaryValue(text || '', language),
-            map || {}
-        ))
+        updateTranslatedText();
     }, [language])
 
     //console.log(reload);
