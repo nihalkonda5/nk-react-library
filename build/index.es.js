@@ -21698,28 +21698,31 @@ function MyPagination(_a) {
     for (var i = 0; i < items.length; i++) {
         _loop_1(i);
     }
-    return (React.createElement("div", null,
-        React.createElement(Pagination, { style: { display: "inline-flex" } },
-            React.createElement(Pagination.First, { "data-page-value": 1, onClick: function () {
-                    console.log('MyPagination', 'itemClicked', 1);
-                    pageSelected(1);
-                } }),
-            React.createElement(Pagination.Prev, { "data-page-value": (selectedPage - 1), disabled: selectedPage === 1, onClick: function () {
-                    console.log('MyPagination', 'itemClicked', selectedPage - 1);
-                    pageSelected(selectedPage - 1);
-                } }),
-            ele,
-            React.createElement(Pagination.Next, { "data-page-value": (selectedPage + 1), disabled: selectedPage === totalPageCount, onClick: function () {
-                    console.log('MyPagination', 'itemClicked', selectedPage + 1);
-                    pageSelected(selectedPage + 1);
-                } }),
-            React.createElement(Pagination.Last, { "data-page-value": totalPageCount, onClick: function () {
-                    console.log('MyPagination', 'itemClicked', totalPageCount);
-                    pageSelected(totalPageCount);
-                } }),
-            React.createElement(NkDropdown, { id: 'select', type: 'select', defaultValue: "" + selectedPage, valueList: arrayRange(1, totalPageCount).map(function (n) { return { label: "Page " + n, value: "" + n }; }), valueChanged: function (id, value) {
-                    pageSelected(value);
-                } }))));
+    return (React.createElement("table", null,
+        React.createElement("tr", null,
+            React.createElement("td", null,
+                React.createElement(Pagination, { style: { display: "inline-flex" } },
+                    React.createElement(Pagination.First, { "data-page-value": 1, onClick: function () {
+                            console.log('MyPagination', 'itemClicked', 1);
+                            pageSelected(1);
+                        } }),
+                    React.createElement(Pagination.Prev, { "data-page-value": (selectedPage - 1), disabled: selectedPage === 1, onClick: function () {
+                            console.log('MyPagination', 'itemClicked', selectedPage - 1);
+                            pageSelected(selectedPage - 1);
+                        } }),
+                    ele,
+                    React.createElement(Pagination.Next, { "data-page-value": (selectedPage + 1), disabled: selectedPage === totalPageCount, onClick: function () {
+                            console.log('MyPagination', 'itemClicked', selectedPage + 1);
+                            pageSelected(selectedPage + 1);
+                        } }),
+                    React.createElement(Pagination.Last, { "data-page-value": totalPageCount, onClick: function () {
+                            console.log('MyPagination', 'itemClicked', totalPageCount);
+                            pageSelected(totalPageCount);
+                        }, style: { marginRight: 5 } }))),
+            React.createElement("td", { style: { paddingLeft: 10 } },
+                React.createElement(NkDropdown, { id: 'select', type: 'select', defaultValue: "" + selectedPage, valueList: arrayRange(1, totalPageCount).map(function (n) { return { label: "Page " + n, value: "" + n }; }), valueChanged: function (id, value) {
+                        pageSelected(value);
+                    } })))));
 }
 
 function NkRichTextContainer(_a) {
