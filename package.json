@@ -10,7 +10,7 @@
     "lint": "standard",
     "format": "prettier-standard --format",
     "test": "jest --coverage",
-    "rf": "npm run build && git add . && git commit -am 'Built'"
+    "git": "npm run build && git add . && git commit -am 'Built' && git push -u origin master"
   },
   "keywords": [],
   "author": "",
