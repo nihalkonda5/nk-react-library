@@ -21858,7 +21858,7 @@ var index$1 = /*#__PURE__*/Object.freeze({
 });
 
 function embedMap(text, json) {
-    Object.keys(json).forEach(function (k) { text = text.replace("{" + k + "}", "" + json[k]); });
+    Object.keys(json).forEach(function (k) { text = text.replace(new RegExp("{" + k + "}", 'g'), "" + json[k]); });
     return text;
 }
 function NkLocalizeText(_a) {

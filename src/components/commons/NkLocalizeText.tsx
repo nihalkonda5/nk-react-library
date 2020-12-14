@@ -2,7 +2,7 @@ import React from 'react'
 import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils'
 
 function embedMap(text: string, json: { [key: string]: string | number }) {
-    Object.keys(json).forEach(k => { text = text.replace(`{${k}}`, `${json[k]}`) })
+    Object.keys(json).forEach(k => { text = text.replace(new RegExp(`{${k}}`, 'g'), `${json[k]}`) })
     return text;
 }
 
