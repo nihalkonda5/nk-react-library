@@ -21883,7 +21883,6 @@ function NkLocalizeText(_a) {
     React.useEffect(function () {
         updateTranslatedText();
     }, [language]);
-    console.log('NkLocalizeText', translatedText);
     return customRender ? customRender(translatedText) : React.createElement(React.Fragment, null, translatedText);
 }
 
