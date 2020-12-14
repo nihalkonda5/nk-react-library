@@ -21857,21 +21857,29 @@ var index$1 = /*#__PURE__*/Object.freeze({
     NkDictionaryUtils: NkDictionaryUtils$1
 });
 
+function embedMap(text, json) {
+    Object.keys(json).forEach(function (k) { text = text.replace("{" + k + "}", "" + json[k]); });
+    return text;
+}
 function NkLocalizeText(_a) {
-    var text = _a.text, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
+    var text = _a.text, map = _a.map, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
     var _d = React__default.useState(NkStateManagerUtils$1.getStateValue(languageStateKey, defaultLanguage)), language = _d[0], setLanguage = _d[1];
-    var _e = React__default.useState(0), reload = _e[0], setReload = _e[1];
+    //const [reload, setReload] = React.useState(0);
+    var _e = React__default.useState(NkDictionaryUtils$1.getDictionaryValue(text || '', language) || ''), translatedText = _e[0], setTranslatedText = _e[1];
     React__default.useEffect(function () {
         NkStateManagerUtils$1.addStateListener(languageStateKey, function (state, value) {
             console.log(state, value);
             setLanguage(value);
         });
         NkDictionaryUtils$1.addDictionaryListener(function () {
-            setReload(new Date().getTime());
+            setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
         });
     }, []);
-    console.log(reload);
-    return React__default.createElement(React__default.Fragment, null, NkDictionaryUtils$1.getDictionaryValue(text, language));
+    React__default.useEffect(function () {
+        setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
+    }, [language]);
+    //console.log(reload);
+    return React__default.createElement(React__default.Fragment, null, translatedText);
 }
 
 
