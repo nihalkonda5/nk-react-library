@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
 export default function NkSubmitButton({
@@ -23,7 +24,7 @@ export default function NkSubmitButton({
                 valueChanged && valueChanged(id, defaultValue)
             }}
         >
-            {label || 'Submit'}
+            <NkLocalizeText text={label || 'Submit'} />
         </Button>
     )
 }

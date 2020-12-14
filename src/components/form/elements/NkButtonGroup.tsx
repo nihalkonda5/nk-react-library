@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
 export default function NkButtonGroup({
@@ -42,7 +43,7 @@ export default function NkButtonGroup({
                         borderColor: 'transparent'
                     }}
                 >
-                    {label}
+                    <NkLocalizeText text={label} />
                 </Button>
             ))}
         </ButtonGroup>

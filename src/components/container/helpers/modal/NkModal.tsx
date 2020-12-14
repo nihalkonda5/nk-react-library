@@ -3,6 +3,7 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { NkReactUtils } from '../../../../utils';
+import { NkLocalizeText } from '../../../commons';
 import NkSimpleInput from '../../../form/elements/NkSimpleInput'
 
 interface IModalOperation {
@@ -112,17 +113,19 @@ export default function NkModal() {
     return (
         <Modal show={show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
             <Modal.Header closeButton onHide={modalResponse(null)}>
-                <Modal.Title>{data.title}</Modal.Title>
+                <Modal.Title>
+                    <NkLocalizeText text={data.title || 'Untitled'} />
+                </Modal.Title>
             </Modal.Header>
             {data.body && <Modal.Body>
                 {data.body}
             </Modal.Body>}
             <Modal.Footer>
                 {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={modalResponse(false)}>
-                    {data.buttons.negativeLabel || 'Cancel'}
+                    <NkLocalizeText text={data.buttons.negativeLabel || 'Cancel'} />
                 </Button>}
                 <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={modalResponse(true)}>
-                    {data.buttons.positiveLabel || 'Submit'}
+                    <NkLocalizeText text={data.buttons.positiveLabel || 'Submit'} />
                 </Button>
             </Modal.Footer>
         </Modal>

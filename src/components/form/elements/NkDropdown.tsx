@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
 export default function NkDropdown({
@@ -28,7 +29,7 @@ export default function NkDropdown({
                 }}
             >
                 {
-                    valueList?.map(v => <option value={v.value} selected={v.value === defaultValue}>{v.label}</option>)
+                    valueList?.map(v => <option value={v.value} selected={v.value === defaultValue}><NkLocalizeText text={v.label} /></option>)
                 }
             </Form.Control>
         </Form.Group>

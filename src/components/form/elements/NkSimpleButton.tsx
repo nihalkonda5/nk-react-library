@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
 export default function NkSimpleButton({
@@ -21,7 +22,7 @@ export default function NkSimpleButton({
             }}
             style={{ margin: 10 }}
         >
-            {label || 'Button'}
+            <NkLocalizeText text={label || 'Button'} />
         </Button>
     )
 }

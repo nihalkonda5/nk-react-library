@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
 export default function NkSimpleInput({
@@ -28,7 +29,9 @@ export default function NkSimpleInput({
             }}
             controlId={id}
         >
-            <Form.Label>{label}</Form.Label>
+            <Form.Label>
+                <NkLocalizeText text={label || ''} />
+            </Form.Label>
             <Form.Control
                 style={{ maxWidth: 600 }}
                 {...attrs}
@@ -40,7 +43,7 @@ export default function NkSimpleInput({
                     valueChanged && valueChanged(id, event.target.value)
                 }}
             />
-            <Form.Text className='text-muted'>{description}</Form.Text>
+            <Form.Text className='text-muted'><NkLocalizeText text={description || ''} /></Form.Text>
         </Form.Group>
     )
 }

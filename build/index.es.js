@@ -4816,7 +4816,8 @@ function NkButtonGroup(_a) {
                     setSelectedButton({ label: label, value: value });
             }, variant: label === selectedButton.label ? 'primary' : 'outline-primary', style: {
                 borderColor: 'transparent'
-            } }, label));
+            } },
+            React.createElement(NkLocalizeText, { text: label })));
     })));
 }
 
@@ -4824,7 +4825,8 @@ function NkSubmitButton(_a) {
     var id = _a.id, inline = _a.inline, defaultValue = _a.defaultValue, label = _a.label, valueChanged = _a.valueChanged;
     return (React.createElement(Button, { className: inline ? 'd-inline' : '', variant: 'primary', type: 'submit', "data-id": id, style: { margin: 10 }, value: defaultValue, onClick: function () {
             valueChanged && valueChanged(id, defaultValue);
-        } }, label || 'Submit'));
+        } },
+        React.createElement(NkLocalizeText, { text: label || 'Submit' })));
 }
 
 function NkSimpleInput(_a) {
@@ -4836,18 +4838,21 @@ function NkSimpleInput(_a) {
     return (React.createElement(FormImpl.Group, { style: {
             maxWidth: 600
         }, controlId: id },
-        React.createElement(FormImpl.Label, null, label),
+        React.createElement(FormImpl.Label, null,
+            React.createElement(NkLocalizeText, { text: label || '' })),
         React.createElement(FormImpl.Control, __assign({ style: { maxWidth: 600 } }, attrs, { id: id, placeholder: placeholder, defaultValue: defaultValue, required: required || false, onChange: function (event) {
                 valueChanged && valueChanged(id, event.target.value);
             } })),
-        React.createElement(FormImpl.Text, { className: 'text-muted' }, description)));
+        React.createElement(FormImpl.Text, { className: 'text-muted' },
+            React.createElement(NkLocalizeText, { text: description || '' }))));
 }
 
 function NkSimpleButton(_a) {
     var id = _a.id, inline = _a.inline, label = _a.label, formButtonClicked = _a.formButtonClicked;
     return (React.createElement(Button, { className: inline ? 'd-inline' : '', variant: 'primary', type: 'button', "data-id": id, onClick: function () {
             formButtonClicked && formButtonClicked(id);
-        }, style: { margin: 10 } }, label || 'Button'));
+        }, style: { margin: 10 } },
+        React.createElement(NkLocalizeText, { text: label || 'Button' })));
 }
 
 var quill = createCommonjsModule(function (module, exports) {
@@ -21602,7 +21607,8 @@ function NkDropdown(_a) {
         }, controlId: id },
         React.createElement(FormImpl.Control, { style: { maxWidth: 600 }, id: id, as: "select", defaultValue: defaultValue, required: required || false, onChange: function (event) {
                 valueChanged && valueChanged(id, event.target.value);
-            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value, selected: v.value === defaultValue }, v.label); }))));
+            } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) { return React.createElement("option", { value: v.value, selected: v.value === defaultValue },
+            React.createElement(NkLocalizeText, { text: v.label })); }))));
 }
 
 function NkFormElement(_a) {
@@ -24983,9 +24989,10 @@ function NkToast(_a) {
         return React.createElement("span", null);
     return (React.createElement(Toast$1, { style: { minWidth: 300 }, onClose: function () { setShow(false); }, show: show, delay: disappearIn || 3000, autohide: true },
         React.createElement(Toast$1.Header, null,
-            React.createElement("strong", { className: "mr-auto" }, title)),
+            React.createElement("strong", { className: "mr-auto" },
+                React.createElement(NkLocalizeText, { text: title }))),
         React.createElement(Toast$1.Body, null, (body || '').split('\n').map(function (s, i) { return React.createElement("span", { key: i },
-            s,
+            React.createElement(NkLocalizeText, { text: s }),
             React.createElement("br", null)); }))));
 }
 
@@ -25354,11 +25361,14 @@ function NkModal() {
     };
     return (React.createElement(Modal$1, { show: show, onClose: modalResponse(null), onHide: modalResponse(null) },
         React.createElement(Modal$1.Header, { closeButton: true, onHide: modalResponse(null) },
-            React.createElement(Modal$1.Title, null, data.title)),
+            React.createElement(Modal$1.Title, null,
+                React.createElement(NkLocalizeText, { text: data.title || 'Untitled' }))),
         data.body && React.createElement(Modal$1.Body, null, data.body),
         React.createElement(Modal$1.Footer, null,
-            data.buttons.hasNegativeButton && React.createElement(Button, { variant: "secondary", onClick: modalResponse(false) }, data.buttons.negativeLabel || 'Cancel'),
-            React.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: modalResponse(true) }, data.buttons.positiveLabel || 'Submit'))));
+            data.buttons.hasNegativeButton && React.createElement(Button, { variant: "secondary", onClick: modalResponse(false) },
+                React.createElement(NkLocalizeText, { text: data.buttons.negativeLabel || 'Cancel' })),
+            React.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: modalResponse(true) },
+                React.createElement(NkLocalizeText, { text: data.buttons.positiveLabel || 'Submit' })))));
 }
 
 function NkContainer(_a) {

@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { Toast } from 'react-bootstrap';
+import { NkLocalizeText } from '../../../commons';
 
 export default function NkToast({
     title,
@@ -24,10 +25,15 @@ export default function NkToast({
             delay={disappearIn || 3000}
             autohide>
             <Toast.Header>
-                <strong className="mr-auto" >{title}</strong>
+                <strong className="mr-auto" >
+                    <NkLocalizeText text={title} />
+                </strong>
             </Toast.Header>
             <Toast.Body>
-                {(body || '').split('\n').map((s, i) => <span key={i}>{s}<br /></span>)}
+                {(body || '').split('\n').map((s, i) => <span key={i}>
+                    <NkLocalizeText text={s} />
+                    <br />
+                </span>)}
             </Toast.Body>
         </Toast>
     )
