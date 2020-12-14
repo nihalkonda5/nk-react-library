@@ -30,12 +30,14 @@ export default function NkDropdown({
             >
                 {
                     valueList?.map(v =>
-                        <option
-                            value={v.value}
-                            selected={v.value === defaultValue}
-                        >
-                            <NkLocalizeText text={v.label} />
-                        </option>
+
+                        <NkLocalizeText text={v.label} customRender={(text: string) => {
+                            return <option
+                                value={v.value}
+                                selected={v.value === defaultValue}>
+                                {text}
+                            </option>;
+                        }} />
                     )
                 }
             </Form.Control>

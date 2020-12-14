@@ -9,11 +9,13 @@ function embedMap(text: string, json: { [key: string]: string | number }) {
 export default function NkLocalizeText({
     text,
     map,
+    customRender,
     languageStateKey = 'language',
     defaultLanguage = 'english'
 }: {
     text: string,
     map?: { [key: string]: string | number },
+    customRender?: (text: string) => JSX.Element
     languageStateKey?: string,
     defaultLanguage?: string
 }) {
@@ -47,5 +49,5 @@ export default function NkLocalizeText({
 
     console.log('NkLocalizeText', translatedText);
 
-    return <>{translatedText}</>
+    return customRender ? customRender(translatedText) : <>{translatedText}</>
 }

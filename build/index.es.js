@@ -21608,8 +21608,9 @@ function NkDropdown(_a) {
         React.createElement(FormImpl.Control, { style: { maxWidth: 600 }, id: id, as: "select", defaultValue: defaultValue, required: required || false, onChange: function (event) {
                 valueChanged && valueChanged(id, event.target.value);
             } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) {
-            return React.createElement("option", { value: v.value, selected: v.value === defaultValue },
-                React.createElement(NkLocalizeText, { text: v.label }));
+            return React.createElement(NkLocalizeText, { text: v.label, customRender: function (text) {
+                    return React.createElement("option", { value: v.value, selected: v.value === defaultValue }, text);
+                } });
         }))));
 }
 
@@ -21863,7 +21864,7 @@ function embedMap(text, json) {
     return text;
 }
 function NkLocalizeText(_a) {
-    var text = _a.text, map = _a.map, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
+    var text = _a.text, map = _a.map, customRender = _a.customRender, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
     var _d = React.useState(NkStateManagerUtils$1.getStateValue(languageStateKey, defaultLanguage)), language = _d[0], setLanguage = _d[1];
     //const [reload, setReload] = React.useState(0);
     var _e = React.useState(NkDictionaryUtils$1.getDictionaryValue(text || '', language) || ''), translatedText = _e[0], setTranslatedText = _e[1];
@@ -21883,7 +21884,7 @@ function NkLocalizeText(_a) {
         updateTranslatedText();
     }, [language]);
     console.log('NkLocalizeText', translatedText);
-    return React.createElement(React.Fragment, null, translatedText);
+    return customRender ? customRender(translatedText) : React.createElement(React.Fragment, null, translatedText);
 }
 
 
