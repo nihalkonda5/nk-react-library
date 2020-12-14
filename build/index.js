@@ -21616,10 +21616,7 @@ function NkDropdown(_a) {
                 valueChanged && valueChanged(id, event.target.value);
             } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) {
             return React__default.createElement("option", { value: v.value, selected: v.value === defaultValue },
-                React__default.createElement(NkLocalizeText, { text: (function () {
-                        console.log('NkDropdown', v.label);
-                        return v.label;
-                    })() }));
+                React__default.createElement(NkLocalizeText, { text: v.label }));
         }))));
 }
 
@@ -21892,7 +21889,7 @@ function NkLocalizeText(_a) {
     React__default.useEffect(function () {
         updateTranslatedText();
     }, [language]);
-    //console.log(reload);
+    console.log('NkLocalizeText', translatedText);
     return React__default.createElement(React__default.Fragment, null, translatedText);
 }
 

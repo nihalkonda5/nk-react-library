@@ -34,10 +34,7 @@ export default function NkDropdown({
                             value={v.value}
                             selected={v.value === defaultValue}
                         >
-                            <NkLocalizeText text={(() => {
-                                console.log('NkDropdown', v.label);
-                                return v.label;
-                            })()} />
+                            <NkLocalizeText text={v.label} />
                         </option>
                     )
                 }

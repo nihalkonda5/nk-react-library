@@ -45,7 +45,7 @@ export default function NkLocalizeText({
         updateTranslatedText();
     }, [language])
 
-    //console.log(reload);
+    console.log('NkLocalizeText', translatedText);
 
     return <>{translatedText}</>
 }
