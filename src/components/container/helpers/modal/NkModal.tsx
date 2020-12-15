@@ -22,9 +22,9 @@ export interface NkModalRef {
 
 export default function NkModal() {
     console.log('NkModal rendering')
-    const [show, setShow] = React.useState(false);
 
     const [data, setData] = React.useState({
+        show: false,
         title: '',
         type: 'custom',
         body: <span />,
@@ -45,10 +45,10 @@ export default function NkModal() {
         const callback: NkModalRef = {
             prompt: (data) => {
                 console.log('NkModal prompt', data);
-                setShow(true);
                 const promise = new Promise<string | null>((resolve, reject) => {
 
                     setData({
+                        show: true,
                         type: 'prompt',
                         title: data.title,
                         body: (
@@ -75,10 +75,10 @@ export default function NkModal() {
             },
             confirm: (data) => {
                 console.log('NkModal confirm', data);
-                setShow(true);
                 const promise = new Promise<boolean | null>((resolve, reject) => {
 
                     setData({
+                        show: true,
                         type: 'confirm',
                         title: data.title,
                         body: <p>{data.description}</p>,
@@ -110,30 +110,32 @@ export default function NkModal() {
             } else if (data.type === 'prompt') {
                 data.resolve(primary === null || primary === false ? null : value);
             }
-            setShow(false);
+            setData((oldData) => { oldData.show = false; return oldData; });
         }
     }
 
     console.log('NkModal render', data);
 
     return (
-        <Modal show={show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
-            <Modal.Header closeButton onHide={modalResponse(null)}>
-                <Modal.Title>
-                    <NkLocalizeText text={data.title} />
-                </Modal.Title>
-            </Modal.Header>
-            {data.body && <Modal.Body>
-                {data.body}
-            </Modal.Body>}
-            <Modal.Footer>
-                {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={modalResponse(false)}>
-                    <NkLocalizeText text={data.buttons.negativeLabel} />
-                </Button>}
-                <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={modalResponse(true)}>
-                    <NkLocalizeText text={data.buttons.positiveLabel} />
-                </Button>
-            </Modal.Footer>
-        </Modal>
+        <>
+            {(data.show) && <Modal show={data.show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
+                <Modal.Header closeButton onHide={modalResponse(null)}>
+                    <Modal.Title>
+                        <NkLocalizeText text={data.title} />
+                    </Modal.Title>
+                </Modal.Header>
+                {data.body && <Modal.Body>
+                    {data.body}
+                </Modal.Body>}
+                <Modal.Footer>
+                    {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={modalResponse(false)}>
+                        <NkLocalizeText text={data.buttons.negativeLabel} />
+                    </Button>}
+                    <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={modalResponse(true)}>
+                        <NkLocalizeText text={data.buttons.positiveLabel} />
+                    </Button>
+                </Modal.Footer>
+            </Modal>}
+        </>
     )
 }

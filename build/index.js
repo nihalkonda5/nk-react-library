@@ -28511,8 +28511,8 @@ styleInject(css_248z$1);
 
 function NkModal() {
     console.log('NkModal rendering');
-    var _a = React__default.useState(false), show = _a[0], setShow = _a[1];
-    var _b = React__default.useState({
+    var _a = React__default.useState({
+        show: false,
         title: '',
         type: 'custom',
         body: React__default.createElement("span", null),
@@ -28524,16 +28524,16 @@ function NkModal() {
         },
         resolve: function (value) { console.log(value); },
         reject: function (error) { console.error(error); }
-    }), data = _b[0], setData = _b[1];
-    var _c = React__default.useState(null), value = _c[0], setValue = _c[1];
+    }), data = _a[0], setData = _a[1];
+    var _b = React__default.useState(null), value = _b[0], setValue = _b[1];
     React__default.useEffect(function () {
         console.log('NkModal useEffect []');
         var callback = {
             prompt: function (data) {
                 console.log('NkModal prompt', data);
-                setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
+                        show: true,
                         type: 'prompt',
                         title: data.title,
                         body: (React__default.createElement(NkSimpleInput, { id: '', type: '', label: data.description, defaultValue: data.defaultValue, valueChanged: function (id, value) { setValue(value); } })),
@@ -28551,9 +28551,9 @@ function NkModal() {
             },
             confirm: function (data) {
                 console.log('NkModal confirm', data);
-                setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
+                        show: true,
                         type: 'confirm',
                         title: data.title,
                         body: React__default.createElement("p", null, data.description),
@@ -28580,11 +28580,11 @@ function NkModal() {
             else if (data.type === 'prompt') {
                 data.resolve(primary === null || primary === false ? null : value);
             }
-            setShow(false);
+            setData(function (oldData) { oldData.show = false; return oldData; });
         };
     };
     console.log('NkModal render', data);
-    return (React__default.createElement(Modal$1, { show: show, onClose: modalResponse(null), onHide: modalResponse(null) },
+    return (React__default.createElement(React__default.Fragment, null, (data.show) && React__default.createElement(Modal$1, { show: data.show, onClose: modalResponse(null), onHide: modalResponse(null) },
         React__default.createElement(Modal$1.Header, { closeButton: true, onHide: modalResponse(null) },
             React__default.createElement(Modal$1.Title, null,
                 React__default.createElement(NkLocalizeText, { text: data.title }))),
@@ -28593,7 +28593,7 @@ function NkModal() {
             data.buttons.hasNegativeButton && React__default.createElement(Button, { variant: "secondary", onClick: modalResponse(false) },
                 React__default.createElement(NkLocalizeText, { text: data.buttons.negativeLabel })),
             React__default.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: modalResponse(true) },
-                React__default.createElement(NkLocalizeText, { text: data.buttons.positiveLabel })))));
+                React__default.createElement(NkLocalizeText, { text: data.buttons.positiveLabel }))))));
 }
 
 function NkContainer(_a) {
