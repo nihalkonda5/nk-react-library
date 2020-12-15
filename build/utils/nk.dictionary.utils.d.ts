@@ -1,11 +1,13 @@
 declare class NkDictionaryUtils {
+    private static instance;
     dictionary: {
         [key: string]: {
             [key: string]: string;
         };
     };
     dictionaryListeners: Function[];
-    constructor();
+    private constructor();
+    static getInstance(): NkDictionaryUtils;
     addDictionaryListener(func: Function): void;
     setDictionary(dict: {
         [key: string]: {

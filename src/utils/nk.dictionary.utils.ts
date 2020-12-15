@@ -1,11 +1,20 @@
 class NkDictionaryUtils {
+
+    private static instance: NkDictionaryUtils;
+
     dictionary: { [key: string]: { [key: string]: string } };
 
     dictionaryListeners: Function[];
 
-    constructor() {
+    private constructor() {
         this.dictionary = {};
         this.dictionaryListeners = [];
+    }
+
+    static getInstance(): NkDictionaryUtils {
+        if (!NkDictionaryUtils.instance)
+            NkDictionaryUtils.instance = new NkDictionaryUtils();
+        return NkDictionaryUtils.instance;
     }
 
     addDictionaryListener(func: Function) {
@@ -22,4 +31,4 @@ class NkDictionaryUtils {
     }
 }
 
-export default new NkDictionaryUtils();
+export default NkDictionaryUtils.getInstance();

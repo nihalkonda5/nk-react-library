@@ -1,8 +1,23 @@
 
 class NkStateManagerUtils {
-    state: { [key: string]: any } = {};
-    stateListeners: { [key: string]: ((state: string, value: any) => void)[] } = {};
-    localStorageKey = 'NkStateManagerUtils';
+
+    private static instance: NkStateManagerUtils;
+
+    state: { [key: string]: any };
+    stateListeners: { [key: string]: ((state: string, value: any) => void)[] };
+    localStorageKey: string;
+
+    private constructor() {
+        this.state = {};
+        this.stateListeners = {};
+        this.localStorageKey = 'NkStateManagerUtils';
+    }
+
+    static getInstance() {
+        if (!NkStateManagerUtils.instance)
+            NkStateManagerUtils.instance = new NkStateManagerUtils();
+        return NkStateManagerUtils.instance;
+    }
 
     getLocalStorageKey() {
         this.localStorageKey;
@@ -63,4 +78,4 @@ class NkStateManagerUtils {
 
 }
 
-export default new NkStateManagerUtils();
+export default NkStateManagerUtils.getInstance();

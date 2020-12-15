@@ -21748,6 +21748,11 @@ function NkRichTextContainer(_a) {
 var NkReactUtils = /** @class */ (function () {
     function NkReactUtils() {
     }
+    NkReactUtils.getInstance = function () {
+        if (!NkReactUtils.instance)
+            NkReactUtils.instance = new NkReactUtils();
+        return NkReactUtils.instance;
+    };
     NkReactUtils.prototype.setToastPanel = function (tp) {
         this.ToastPanel = tp;
     };
@@ -21762,7 +21767,7 @@ var NkReactUtils = /** @class */ (function () {
     };
     return NkReactUtils;
 }());
-var NkReactUtils$1 = new NkReactUtils();
+var NkReactUtils$1 = NkReactUtils.getInstance();
 
 var NkStateManagerUtils = /** @class */ (function () {
     function NkStateManagerUtils() {
@@ -21770,6 +21775,11 @@ var NkStateManagerUtils = /** @class */ (function () {
         this.stateListeners = {};
         this.localStorageKey = 'NkStateManagerUtils';
     }
+    NkStateManagerUtils.getInstance = function () {
+        if (!NkStateManagerUtils.instance)
+            NkStateManagerUtils.instance = new NkStateManagerUtils();
+        return NkStateManagerUtils.instance;
+    };
     NkStateManagerUtils.prototype.getLocalStorageKey = function () {
         this.localStorageKey;
     };
@@ -21830,13 +21840,18 @@ var NkStateManagerUtils = /** @class */ (function () {
     };
     return NkStateManagerUtils;
 }());
-var NkStateManagerUtils$1 = new NkStateManagerUtils();
+var NkStateManagerUtils$1 = NkStateManagerUtils.getInstance();
 
 var NkDictionaryUtils = /** @class */ (function () {
     function NkDictionaryUtils() {
         this.dictionary = {};
         this.dictionaryListeners = [];
     }
+    NkDictionaryUtils.getInstance = function () {
+        if (!NkDictionaryUtils.instance)
+            NkDictionaryUtils.instance = new NkDictionaryUtils();
+        return NkDictionaryUtils.instance;
+    };
     NkDictionaryUtils.prototype.addDictionaryListener = function (func) {
         this.dictionaryListeners.push(func);
     };
@@ -21854,7 +21869,7 @@ var NkDictionaryUtils = /** @class */ (function () {
     };
     return NkDictionaryUtils;
 }());
-var NkDictionaryUtils$1 = new NkDictionaryUtils();
+var NkDictionaryUtils$1 = NkDictionaryUtils.getInstance();
 
 
 

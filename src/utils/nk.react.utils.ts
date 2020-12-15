@@ -5,10 +5,23 @@ import { NkToastPanelRef } from "../components/container/helpers/toast/NkToastPa
 import { NkModalRef } from "../components/container/helpers/modal/NkModal";
 
 class NkReactUtils {
+
+    private static instance: NkReactUtils;
+
     ToastPanel!: NkToastPanelRef;
     location!: { latitude: number; longitude: number; raw: any; };
     Redirect!: NkRedirectRef;
     Modal!: NkModalRef;
+
+    private constructor() {
+
+    }
+
+    static getInstance() {
+        if (!NkReactUtils.instance)
+            NkReactUtils.instance = new NkReactUtils();
+        return NkReactUtils.instance;
+    }
 
     setToastPanel(tp: NkToastPanelRef) {
         this.ToastPanel = tp;
@@ -27,4 +40,4 @@ class NkReactUtils {
     }
 }
 
-export default new NkReactUtils();
+export default NkReactUtils.getInstance();

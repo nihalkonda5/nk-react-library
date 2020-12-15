@@ -1,4 +1,5 @@
 declare class NkStateManagerUtils {
+    private static instance;
     state: {
         [key: string]: any;
     };
@@ -6,6 +7,8 @@ declare class NkStateManagerUtils {
         [key: string]: ((state: string, value: any) => void)[];
     };
     localStorageKey: string;
+    private constructor();
+    static getInstance(): NkStateManagerUtils;
     getLocalStorageKey(): void;
     setLocalStorageKey(key: string): void;
     addStateListener(key: string, listener: ((state: string, value: any) => void)): void;
