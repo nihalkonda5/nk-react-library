@@ -8,6 +8,7 @@ import * as QuillTypes from 'quill'
 import MagicUrl from 'quill-magic-url'
 import { config } from './NkFormElementTypes'
 import { Form } from 'react-bootstrap'
+import { NkLocalizeText } from '../../commons'
 //import ReactQuill from 'react-quill'
 
 export default class NkRichTextEditor extends Component<config> {
@@ -33,7 +34,9 @@ export default class NkRichTextEditor extends Component<config> {
         return (
             <div>
                 <Form.Group controlId={this.props.id}>
-                    <Form.Label>{this.props.label}</Form.Label>
+                    <Form.Label>
+                        <NkLocalizeText text={this.props.label || ''} />
+                    </Form.Label>
                     <ReactQuillEditor
                         id={this.props.id}
                         style={{
@@ -77,7 +80,7 @@ export default class NkRichTextEditor extends Component<config> {
                         }}
                     />
 
-                    <Form.Text className='text-muted'>{this.props.description}</Form.Text>
+                    <Form.Text className='text-muted'><NkLocalizeText text={this.props.description || ''} /></Form.Text>
                 </Form.Group>
 
                 {/* <MyModal

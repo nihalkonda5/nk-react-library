@@ -24734,7 +24734,8 @@ var NkRichTextEditor = /** @class */ (function (_super) {
         Quill.register('modules/magicUrl', MagicUrl);
         return (React.createElement("div", null,
             React.createElement(FormImpl.Group, { controlId: this.props.id },
-                React.createElement(FormImpl.Label, null, this.props.label),
+                React.createElement(FormImpl.Label, null,
+                    React.createElement(NkLocalizeText, { text: this.props.label || '' })),
                 React.createElement(lib, { id: this.props.id, style: {
                         maxWidth: 600
                     }, ref: function (el) {
@@ -24765,7 +24766,8 @@ var NkRichTextEditor = /** @class */ (function (_super) {
                             }
                         }
                     } }),
-                React.createElement(FormImpl.Text, { className: 'text-muted' }, this.props.description))));
+                React.createElement(FormImpl.Text, { className: 'text-muted' },
+                    React.createElement(NkLocalizeText, { text: this.props.description || '' })))));
     };
     return NkRichTextEditor;
 }(Component));
