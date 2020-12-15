@@ -28530,6 +28530,7 @@ function NkModal() {
         console.log('NkModal useEffect []');
         var callback = {
             prompt: function (data) {
+                console.log('NkModal prompt', data);
                 setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
@@ -28549,6 +28550,7 @@ function NkModal() {
                 return promise;
             },
             confirm: function (data) {
+                console.log('NkModal confirm', data);
                 setShow(true);
                 var promise = new Promise(function (resolve, reject) {
                     setData({
@@ -28581,6 +28583,7 @@ function NkModal() {
             setShow(false);
         };
     };
+    console.log('NkModal render', data);
     return (React__default.createElement(Modal$1, { show: show, onClose: modalResponse(null), onHide: modalResponse(null) },
         React__default.createElement(Modal$1.Header, { closeButton: true, onHide: modalResponse(null) },
             React__default.createElement(Modal$1.Title, null,

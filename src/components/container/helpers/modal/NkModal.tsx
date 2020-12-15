@@ -44,6 +44,7 @@ export default function NkModal() {
         console.log('NkModal useEffect []')
         const callback: NkModalRef = {
             prompt: (data) => {
+                console.log('NkModal prompt', data);
                 setShow(true);
                 const promise = new Promise<string | null>((resolve, reject) => {
 
@@ -73,6 +74,7 @@ export default function NkModal() {
                 return promise;
             },
             confirm: (data) => {
+                console.log('NkModal confirm', data);
                 setShow(true);
                 const promise = new Promise<boolean | null>((resolve, reject) => {
 
@@ -99,6 +101,8 @@ export default function NkModal() {
         NkReactUtils.setModal(callback);
     }, [])
 
+
+
     const modalResponse = (primary: boolean | null) => {
         return () => {
             if (data.type === 'confirm') {
@@ -109,6 +113,8 @@ export default function NkModal() {
             setShow(false);
         }
     }
+
+    console.log('NkModal render', data);
 
     return (
         <Modal show={show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
