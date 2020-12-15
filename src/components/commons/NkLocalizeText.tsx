@@ -1,9 +1,16 @@
 import React from 'react'
 import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils'
 
-function embedMap(text: string, json: { [key: string]: string | number }) {
-    Object.keys(json).forEach(k => { text = text.replace(new RegExp(`{${k}}`, 'g'), `${json[k]}`) })
-    return text;
+function translateText(source: string, map: { [key: string]: string | number } = {}, language: string) {
+    const regex = /[+-]?([0-9]*[.])?[0-9]+/g;
+    const numbers = source.match(regex) || [];
+    source = source.replace(regex, '{MROX_NUM_MROX}')
+
+    let translation = NkDictionaryUtils.getDictionaryValue(source || '', language);
+
+    Object.keys(map).forEach(k => { translation = translation.replace(new RegExp(`{${k}}`, 'g'), `${map[k]}`); })
+    numbers.forEach(n => { translation = translation.replace('{MROX_NUM_MROX}', n); })
+    return translation;
 }
 
 export default function NkLocalizeText({
@@ -27,10 +34,7 @@ export default function NkLocalizeText({
     const [translatedText, setTranslatedText] = React.useState(NkDictionaryUtils.getDictionaryValue(text || '', language) || '');
 
     const updateTranslatedText = () => {
-        setTranslatedText(embedMap(
-            NkDictionaryUtils.getDictionaryValue(text || '', language),
-            map || {}
-        ))
+        setTranslatedText(translateText(text, map, language))
     };
 
     React.useEffect(() => {

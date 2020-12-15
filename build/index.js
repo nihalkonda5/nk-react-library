@@ -21865,9 +21865,15 @@ var index$1 = /*#__PURE__*/Object.freeze({
     NkDictionaryUtils: NkDictionaryUtils$1
 });
 
-function embedMap(text, json) {
-    Object.keys(json).forEach(function (k) { text = text.replace(new RegExp("{" + k + "}", 'g'), "" + json[k]); });
-    return text;
+function translateText(source, map, language) {
+    if (map === void 0) { map = {}; }
+    var regex = /[+-]?([0-9]*[.])?[0-9]+/g;
+    var numbers = source.match(regex) || [];
+    source = source.replace(regex, '{MROX_NUM_MROX}');
+    var translation = NkDictionaryUtils$1.getDictionaryValue(source || '', language);
+    Object.keys(map).forEach(function (k) { translation = translation.replace(new RegExp("{" + k + "}", 'g'), "" + map[k]); });
+    numbers.forEach(function (n) { translation = translation.replace('{MROX_NUM_MROX}', n); });
+    return translation;
 }
 function NkLocalizeText(_a) {
     var text = _a.text, map = _a.map, customRender = _a.customRender, _b = _a.languageStateKey, languageStateKey = _b === void 0 ? 'language' : _b, _c = _a.defaultLanguage, defaultLanguage = _c === void 0 ? 'english' : _c;
@@ -21875,7 +21881,7 @@ function NkLocalizeText(_a) {
     //const [reload, setReload] = React.useState(0);
     var _e = React__default.useState(NkDictionaryUtils$1.getDictionaryValue(text || '', language) || ''), translatedText = _e[0], setTranslatedText = _e[1];
     var updateTranslatedText = function () {
-        setTranslatedText(embedMap(NkDictionaryUtils$1.getDictionaryValue(text || '', language), map || {}));
+        setTranslatedText(translateText(text, map, language));
     };
     React__default.useEffect(function () {
         NkStateManagerUtils$1.addStateListener(languageStateKey, function (state, value) {
