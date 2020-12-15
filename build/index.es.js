@@ -21862,10 +21862,11 @@ function translateText(source, map, language) {
     if (map === void 0) { map = {}; }
     var regex = /[+-]?([0-9]*[.])?[0-9]+/g;
     var numbers = source.match(regex) || [];
-    source = source.replace(regex, '{MROX_NUM_MROX}');
+    var MROX_NUM_MROX = 'MROX_NUM_MROX';
+    source = source.replace(regex, MROX_NUM_MROX);
     var translation = NkDictionaryUtils$1.getDictionaryValue(source || '', language);
     Object.keys(map).forEach(function (k) { translation = translation.replace(new RegExp("{" + k + "}", 'g'), "" + map[k]); });
-    numbers.forEach(function (n) { translation = translation.replace('{MROX_NUM_MROX}', n); });
+    numbers.forEach(function (n) { translation = translation.replace(MROX_NUM_MROX, n); });
     return translation;
 }
 function NkLocalizeText(_a) {

@@ -4,12 +4,13 @@ import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils'
 function translateText(source: string, map: { [key: string]: string | number } = {}, language: string) {
     const regex = /[+-]?([0-9]*[.])?[0-9]+/g;
     const numbers = source.match(regex) || [];
-    source = source.replace(regex, '{MROX_NUM_MROX}')
+    const MROX_NUM_MROX = 'MROX_NUM_MROX';
+    source = source.replace(regex, MROX_NUM_MROX)
 
     let translation = NkDictionaryUtils.getDictionaryValue(source || '', language);
 
     Object.keys(map).forEach(k => { translation = translation.replace(new RegExp(`{${k}}`, 'g'), `${map[k]}`); })
-    numbers.forEach(n => { translation = translation.replace('{MROX_NUM_MROX}', n); })
+    numbers.forEach(n => { translation = translation.replace(MROX_NUM_MROX, n); })
     return translation;
 }
 
