@@ -20,6 +20,8 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
     dictionary?: { [key: string]: { [key: string]: string } }
 }) {
 
+    const [locationLoaded, setLocationLoaded] = React.useState(!requireLocation);
+
     React.useEffect(() => {
         stateKey && NkStateManagerUtils.setLocalStorageKey(stateKey);
         NkStateManagerUtils.loadState();
@@ -29,26 +31,32 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
     return (
         <>
             {
-                requireLocation &&
+                requireLocation && !locationLoaded &&
                 <LocationLoader onSuccess={(position) => {
                     NkReactUtils.setLocation(position.coords.latitude, position.coords.longitude, position.coords);
+                    setLocationLoaded(true);
                 }} onError={() => {
                     Axios.get('https://geolocation-db.com/json/09ba3820-0f88-11eb-9ba6-e1dd7dece2b8')
                         .then((response) => {
                             NkReactUtils.setLocation(response.data.latitude, response.data.longitude, response.data);
+                            setLocationLoaded(true);
                         }).catch((error) => {
                             console.error(error);
+                            setLocationLoaded(true);
                         })
                 }} />
             }
-            {headerComponent}
-            <Container style={{
-                position: 'relative'
-            }}>
-                {children}
-                <NkToastPanel />
-                <NkModal />
-            </Container>
+
+            {locationLoaded && <>
+                {headerComponent}
+                <Container style={{
+                    position: 'relative'
+                }}>
+                    {children}
+                    <NkToastPanel />
+                    <NkModal />
+                </Container>
+            </>}
         </>
     )
 }

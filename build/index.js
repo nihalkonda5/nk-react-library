@@ -25406,30 +25406,35 @@ function NkModal() {
 
 function NkContainer(_a) {
     var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary;
+    var _b = React__default.useState(!requireLocation), locationLoaded = _b[0], setLocationLoaded = _b[1];
     React__default.useEffect(function () {
         stateKey && NkStateManagerUtils$1.setLocalStorageKey(stateKey);
         NkStateManagerUtils$1.loadState();
         dictionary && NkDictionaryUtils$1.setDictionary(dictionary);
     }, []);
     return (React__default.createElement(React__default.Fragment, null,
-        requireLocation &&
+        requireLocation && !locationLoaded &&
             React__default.createElement(LocationLoader, { onSuccess: function (position) {
                     NkReactUtils$1.setLocation(position.coords.latitude, position.coords.longitude, position.coords);
+                    setLocationLoaded(true);
                 }, onError: function () {
                     axios$1.get('https://geolocation-db.com/json/09ba3820-0f88-11eb-9ba6-e1dd7dece2b8')
                         .then(function (response) {
                         NkReactUtils$1.setLocation(response.data.latitude, response.data.longitude, response.data);
+                        setLocationLoaded(true);
                     }).catch(function (error) {
                         console.error(error);
+                        setLocationLoaded(true);
                     });
                 } }),
-        headerComponent,
-        React__default.createElement(Container, { style: {
-                position: 'relative'
-            } },
-            children,
-            React__default.createElement(NkToastPanel, null),
-            React__default.createElement(NkModal, null))));
+        locationLoaded && React__default.createElement(React__default.Fragment, null,
+            headerComponent,
+            React__default.createElement(Container, { style: {
+                    position: 'relative'
+                } },
+                children,
+                React__default.createElement(NkToastPanel, null),
+                React__default.createElement(NkModal, null)))));
 }
 
 var NkRedirect = reactRouterDom.withRouter(function NkRedirect(props) {

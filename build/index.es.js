@@ -25399,30 +25399,35 @@ function NkModal() {
 
 function NkContainer(_a) {
     var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary;
+    var _b = React.useState(!requireLocation), locationLoaded = _b[0], setLocationLoaded = _b[1];
     React.useEffect(function () {
         stateKey && NkStateManagerUtils$1.setLocalStorageKey(stateKey);
         NkStateManagerUtils$1.loadState();
         dictionary && NkDictionaryUtils$1.setDictionary(dictionary);
     }, []);
     return (React.createElement(React.Fragment, null,
-        requireLocation &&
+        requireLocation && !locationLoaded &&
             React.createElement(LocationLoader, { onSuccess: function (position) {
                     NkReactUtils$1.setLocation(position.coords.latitude, position.coords.longitude, position.coords);
+                    setLocationLoaded(true);
                 }, onError: function () {
                     axios$1.get('https://geolocation-db.com/json/09ba3820-0f88-11eb-9ba6-e1dd7dece2b8')
                         .then(function (response) {
                         NkReactUtils$1.setLocation(response.data.latitude, response.data.longitude, response.data);
+                        setLocationLoaded(true);
                     }).catch(function (error) {
                         console.error(error);
+                        setLocationLoaded(true);
                     });
                 } }),
-        headerComponent,
-        React.createElement(Container, { style: {
-                position: 'relative'
-            } },
-            children,
-            React.createElement(NkToastPanel, null),
-            React.createElement(NkModal, null))));
+        locationLoaded && React.createElement(React.Fragment, null,
+            headerComponent,
+            React.createElement(Container, { style: {
+                    position: 'relative'
+                } },
+                children,
+                React.createElement(NkToastPanel, null),
+                React.createElement(NkModal, null)))));
 }
 
 var NkRedirect = withRouter(function NkRedirect(props) {
