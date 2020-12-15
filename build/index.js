@@ -28580,7 +28580,7 @@ function NkModal() {
             else if (data.type === 'prompt') {
                 data.resolve(primary === null || primary === false ? null : value);
             }
-            setData(function (oldData) { oldData.show = false; return oldData; });
+            setData(__assign(__assign({}, data), { show: false }));
         };
     };
     console.log('NkModal render', data);

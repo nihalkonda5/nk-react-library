@@ -110,7 +110,10 @@ export default function NkModal() {
             } else if (data.type === 'prompt') {
                 data.resolve(primary === null || primary === false ? null : value);
             }
-            setData((oldData) => { oldData.show = false; return oldData; });
+            setData({
+                ...data,
+                show: false
+            });
         }
     }
 
