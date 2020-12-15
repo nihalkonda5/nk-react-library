@@ -28580,13 +28580,13 @@ function NkModal() {
     return (React.createElement(Modal$1, { show: show, onClose: modalResponse(null), onHide: modalResponse(null) },
         React.createElement(Modal$1.Header, { closeButton: true, onHide: modalResponse(null) },
             React.createElement(Modal$1.Title, null,
-                React.createElement(NkLocalizeText, { text: data.title || 'Untitled' }))),
+                React.createElement(NkLocalizeText, { text: data.title }))),
         data.body && React.createElement(Modal$1.Body, null, data.body),
         React.createElement(Modal$1.Footer, null,
             data.buttons.hasNegativeButton && React.createElement(Button, { variant: "secondary", onClick: modalResponse(false) },
-                React.createElement(NkLocalizeText, { text: data.buttons.negativeLabel || 'Cancel' })),
+                React.createElement(NkLocalizeText, { text: data.buttons.negativeLabel })),
             React.createElement(Button, { variant: data.buttons.positiveWarning ? "danger" : "primary", onClick: modalResponse(true) },
-                React.createElement(NkLocalizeText, { text: data.buttons.positiveLabel || 'Submit' })))));
+                React.createElement(NkLocalizeText, { text: data.buttons.positiveLabel })))));
 }
 
 function NkContainer(_a) {

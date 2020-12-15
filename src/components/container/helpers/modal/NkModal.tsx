@@ -120,7 +120,7 @@ export default function NkModal() {
         <Modal show={show} onClose={modalResponse(null)} onHide={modalResponse(null)}>
             <Modal.Header closeButton onHide={modalResponse(null)}>
                 <Modal.Title>
-                    <NkLocalizeText text={data.title || 'Untitled'} />
+                    <NkLocalizeText text={data.title} />
                 </Modal.Title>
             </Modal.Header>
             {data.body && <Modal.Body>
@@ -128,10 +128,10 @@ export default function NkModal() {
             </Modal.Body>}
             <Modal.Footer>
                 {data.buttons.hasNegativeButton && <Button variant="secondary" onClick={modalResponse(false)}>
-                    <NkLocalizeText text={data.buttons.negativeLabel || 'Cancel'} />
+                    <NkLocalizeText text={data.buttons.negativeLabel} />
                 </Button>}
                 <Button variant={data.buttons.positiveWarning ? "danger" : "primary"} onClick={modalResponse(true)}>
-                    <NkLocalizeText text={data.buttons.positiveLabel || 'Submit'} />
+                    <NkLocalizeText text={data.buttons.positiveLabel} />
                 </Button>
             </Modal.Footer>
         </Modal>
