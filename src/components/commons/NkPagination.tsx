@@ -52,7 +52,7 @@ export default function MyPagination({ totalPageCount, selectedPage, pageSelecte
     if (totalPageCount === 0)
         return <span />;
 
-    const items = paginationPattern(selectedPage, totalPageCount, 1);
+    const items = paginationPattern(selectedPage, totalPageCount, 0);
     const ele = [];
     for (let i = 0; i < items.length; i++) {
         if (items[i] === -1) {

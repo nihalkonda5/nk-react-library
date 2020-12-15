@@ -24870,7 +24870,7 @@ function MyPagination(_a) {
     var totalPageCount = _a.totalPageCount, selectedPage = _a.selectedPage, pageSelected = _a.pageSelected;
     if (totalPageCount === 0)
         return React__default.createElement("span", null);
-    var items = paginationPattern(selectedPage, totalPageCount, 1);
+    var items = paginationPattern(selectedPage, totalPageCount, 0);
     var ele = [];
     var _loop_1 = function (i) {
         if (items[i] === -1) {
