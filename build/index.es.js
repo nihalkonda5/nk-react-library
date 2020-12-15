@@ -25078,7 +25078,7 @@ function NkLocalizeText(_a) {
 }
 
 function NkDropdownMenu(_a) {
-    var id = _a.id, valueList = _a.valueList;
+    var id = _a.id, menu = _a.menu;
     return (React.createElement(Dropdown$1, { id: id || 'dropdown' },
         React.createElement(Dropdown$1.Toggle, { as: React.forwardRef(function (_a, ref) {
                 var children = _a.children, onClick = _a.onClick;
@@ -25089,7 +25089,7 @@ function NkDropdownMenu(_a) {
                         padding: 10
                     } }, children);
             }) }, "\u22EE"),
-        React.createElement(Dropdown$1.Menu, null, valueList.map(function (v) {
+        React.createElement(Dropdown$1.Menu, null, menu.map(function (v) {
             return React.createElement(Dropdown$1.Item, { onClick: function () { v.onClick(); } },
                 React.createElement(NkLocalizeText, { text: v.label }));
         }))));

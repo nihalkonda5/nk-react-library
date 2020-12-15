@@ -1,6 +1,6 @@
-export default function NkDropdownMenu({ id, valueList, }: {
+export default function NkDropdownMenu({ id, menu, }: {
     id?: string;
-    valueList: {
+    menu: {
         label: string;
         onClick(): void;
     }[];

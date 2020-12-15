@@ -4,10 +4,10 @@ import NkLocalizeText from './NkLocalizeText'
 
 export default function NkDropdownMenu({
     id,
-    valueList,
+    menu,
 }: {
     id?: string,
-    valueList: { label: string, onClick(): void }[]
+    menu: { label: string, onClick(): void }[]
 }) {
 
     return (
@@ -32,7 +32,7 @@ export default function NkDropdownMenu({
 
             <Dropdown.Menu>
                 {
-                    valueList.map(v =>
+                    menu.map(v =>
                         <Dropdown.Item onClick={() => { v.onClick(); }}><NkLocalizeText text={v.label} /></Dropdown.Item>
                     )
                 }

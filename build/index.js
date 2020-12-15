@@ -25085,7 +25085,7 @@ function NkLocalizeText(_a) {
 }
 
 function NkDropdownMenu(_a) {
-    var id = _a.id, valueList = _a.valueList;
+    var id = _a.id, menu = _a.menu;
     return (React__default.createElement(Dropdown$1, { id: id || 'dropdown' },
         React__default.createElement(Dropdown$1.Toggle, { as: React__default.forwardRef(function (_a, ref) {
                 var children = _a.children, onClick = _a.onClick;
@@ -25096,7 +25096,7 @@ function NkDropdownMenu(_a) {
                         padding: 10
                     } }, children);
             }) }, "\u22EE"),
-        React__default.createElement(Dropdown$1.Menu, null, valueList.map(function (v) {
+        React__default.createElement(Dropdown$1.Menu, null, menu.map(function (v) {
             return React__default.createElement(Dropdown$1.Item, { onClick: function () { v.onClick(); } },
                 React__default.createElement(NkLocalizeText, { text: v.label }));
         }))));
