@@ -25082,7 +25082,7 @@ function NkLocalizeText(_a) {
     }, []);
     React__default.useEffect(function () {
         updateTranslatedText();
-    }, [language]);
+    }, [text, language]);
     return customRender ? customRender(translatedText) : React__default.createElement(React__default.Fragment, null, translatedText);
 }
 

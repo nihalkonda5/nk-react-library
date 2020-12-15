@@ -50,7 +50,7 @@ export default function NkLocalizeText({
 
     React.useEffect(() => {
         updateTranslatedText();
-    }, [language])
+    }, [text, language]);
 
     return customRender ? customRender(translatedText) : <>{translatedText}</>
 }
