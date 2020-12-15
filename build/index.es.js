@@ -25084,7 +25084,9 @@ function NkDropdownMenu(_a) {
                 var children = _a.children, onClick = _a.onClick;
                 return React.createElement("span", { ref: ref, onClick: onClick, style: {
                         fontWeight: 'bolder',
-                        fontSize: 25
+                        fontSize: 25,
+                        cursor: 'pointer',
+                        padding: 10
                     } }, children);
             }) }, "\u22EE"),
         React.createElement(Dropdown$1.Menu, null, valueList.map(function (v) {

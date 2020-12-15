@@ -19,7 +19,9 @@ export default function NkDropdownMenu({
                         onClick={onClick}
                         style={{
                             fontWeight: 'bolder',
-                            fontSize: 25
+                            fontSize: 25,
+                            cursor: 'pointer',
+                            padding: 10
                         }}
                     >
                         {children}
