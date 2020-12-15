@@ -7,7 +7,7 @@ export default function NkDropdownMenu({
     valueList,
 }: {
     id?: string,
-    valueList: { label: string, onClick(event: React.MouseEvent): void }[]
+    valueList: { label: string, onClick(): void }[]
 }) {
 
     return (
@@ -33,7 +33,7 @@ export default function NkDropdownMenu({
             <Dropdown.Menu>
                 {
                     valueList.map(v =>
-                        <Dropdown.Item onClick={v.onClick}><NkLocalizeText text={v.label} /></Dropdown.Item>
+                        <Dropdown.Item onClick={() => { v.onClick(); }}><NkLocalizeText text={v.label} /></Dropdown.Item>
                     )
                 }
             </Dropdown.Menu>

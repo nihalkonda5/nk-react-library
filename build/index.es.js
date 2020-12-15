@@ -25090,7 +25090,7 @@ function NkDropdownMenu(_a) {
                     } }, children);
             }) }, "\u22EE"),
         React.createElement(Dropdown$1.Menu, null, valueList.map(function (v) {
-            return React.createElement(Dropdown$1.Item, { onClick: v.onClick },
+            return React.createElement(Dropdown$1.Item, { onClick: function () { v.onClick(); } },
                 React.createElement(NkLocalizeText, { text: v.label }));
         }))));
 }
