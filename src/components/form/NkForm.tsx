@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { Form } from 'react-bootstrap'
+import { NkLocalizeText } from '../commons';
 import NkFormElement from './elements/NkFormElement'
 import { config } from './elements/NkFormElementTypes';
 
@@ -33,8 +34,8 @@ export default class MyForm extends Component<{
                     this.props.formSubmit(this.result)
                 }}
             >
-                <h3>{this.props.title}</h3>
-                <p className='text-muted'>{this.props.description}</p>
+                {this.props.title && <h3><NkLocalizeText text={this.props.title} /></h3>}
+                {this.props.description && <p className='text-muted'><NkLocalizeText text={this.props.description} /></p>}
                 {this.props.formConfig.map((fc: config) => (
                     <NkFormElement
                         key={fc.id}

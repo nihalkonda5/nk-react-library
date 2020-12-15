@@ -25486,8 +25486,10 @@ var MyForm = /** @class */ (function (_super) {
                 event.preventDefault();
                 _this.props.formSubmit(_this.result);
             } },
-            React__default.createElement("h3", null, this.props.title),
-            React__default.createElement("p", { className: 'text-muted' }, this.props.description),
+            this.props.title && React__default.createElement("h3", null,
+                React__default.createElement(NkLocalizeText, { text: this.props.title })),
+            this.props.description && React__default.createElement("p", { className: 'text-muted' },
+                React__default.createElement(NkLocalizeText, { text: this.props.description })),
             this.props.formConfig.map(function (fc) { return (React__default.createElement(NkFormElement, { key: fc.id, elementConfig: __assign(__assign({}, fc), { valueChanged: _this.updateResult, formButtonClicked: _this.props.formButtonClicked }) })); })));
     };
     return MyForm;
