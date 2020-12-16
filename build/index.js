@@ -28220,11 +28220,12 @@ function NkToast(_a) {
             React__default.createElement("br", null)); }))));
 }
 
-function NkToastPanel() {
+function NkToastPanel(_a) {
+    var onLoad = _a.onLoad;
     console.log('NkToastPanel rendering');
-    var _a = React__default.useState([]), toastList = _a[0], setToastList = _a[1];
-    var _b = React__default.useState(0), counter = _b[0], setCounter = _b[1];
-    var _c = React__default.useState(0), scrollY = _c[0], setScrollY = _c[1];
+    var _b = React__default.useState([]), toastList = _b[0], setToastList = _b[1];
+    var _c = React__default.useState(0), counter = _c[0], setCounter = _c[1];
+    var _d = React__default.useState(0), scrollY = _d[0], setScrollY = _d[1];
     React__default.useEffect(function () {
         console.log('toastList', toastList, 'counter', counter);
     }, [toastList, counter]);
@@ -28249,6 +28250,7 @@ function NkToastPanel() {
             }
         };
         NkReactUtils$1.setToastPanel(callback);
+        onLoad();
     }, []);
     return (React__default.createElement("div", { style: {
             position: 'absolute',
@@ -28511,9 +28513,10 @@ styleInject(css_248z);
 var css_248z$1 = ".quill img{\n    max-height: 400px;\n    max-width: 400px;\n    max-width: 60vw;\n}\n\n.ql-container{\n    font-size: inherit!important;\n}";
 styleInject(css_248z$1);
 
-function NkModal() {
+function NkModal(_a) {
+    var onLoad = _a.onLoad;
     console.log('NkModal rendering');
-    var _a = React__default.useState({
+    var _b = React__default.useState({
         show: false,
         title: '',
         type: 'custom',
@@ -28526,8 +28529,8 @@ function NkModal() {
         },
         resolve: function (value) { console.log(value); },
         reject: function (error) { console.error(error); }
-    }), data = _a[0], setData = _a[1];
-    var _b = React__default.useState(null), value = _b[0], setValue = _b[1];
+    }), data = _b[0], setData = _b[1];
+    var _c = React__default.useState(null), value = _c[0], setValue = _c[1];
     React__default.useEffect(function () {
         console.log('NkModal useEffect []');
         var callback = {
@@ -28574,6 +28577,7 @@ function NkModal() {
             }
         };
         NkReactUtils$1.setModal(callback);
+        onLoad();
     }, []);
     var modalResponse = function (primary) {
         return function () {
@@ -28602,6 +28606,8 @@ function NkModal() {
 function NkContainer(_a) {
     var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary;
     var _b = React__default.useState(!requireLocation), locationLoaded = _b[0], setLocationLoaded = _b[1];
+    var _c = React__default.useState(false), toastPanelLoaded = _c[0], setToastPanelLoaded = _c[1];
+    var _d = React__default.useState(false), modalLoaded = _d[0], setModalLoaded = _d[1];
     React__default.useEffect(function () {
         stateKey && NkStateManagerUtils$1.setLocalStorageKey(stateKey);
         NkStateManagerUtils$1.loadState();
@@ -28627,9 +28633,9 @@ function NkContainer(_a) {
             React__default.createElement(Container, { style: {
                     position: 'relative'
                 } },
-                React__default.createElement(NkToastPanel, null),
-                React__default.createElement(NkModal, null),
-                children))));
+                React__default.createElement(NkToastPanel, { onLoad: function () { setToastPanelLoaded(true); } }),
+                React__default.createElement(NkModal, { onLoad: function () { setModalLoaded(true); } }),
+                toastPanelLoaded && modalLoaded && children))));
 }
 
 var NkRedirect = reactRouterDom.withRouter(function NkRedirect(props) {

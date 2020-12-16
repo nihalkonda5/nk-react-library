@@ -20,7 +20,7 @@ export interface NkModalRef {
     confirm(data: IModalOperation): Promise<boolean | null>
 }
 
-export default function NkModal() {
+export default function NkModal({ onLoad }: { onLoad(): void }) {
     console.log('NkModal rendering')
 
     const [data, setData] = React.useState({
@@ -99,6 +99,7 @@ export default function NkModal() {
         };
 
         NkReactUtils.setModal(callback);
+        onLoad();
     }, [])
 
 

@@ -7,7 +7,7 @@ export interface NkToastPanelRef {
     addToast(title: string, body: string): any
 }
 
-export default function NkToastPanel() {
+export default function NkToastPanel({ onLoad }: { onLoad(): void }) {
     console.log('NkToastPanel rendering')
     const [toastList, setToastList] = React.useState<{
         title: string,
@@ -42,6 +42,7 @@ export default function NkToastPanel() {
         };
 
         NkReactUtils.setToastPanel(callback);
+        onLoad();
     }, [])
 
     return (

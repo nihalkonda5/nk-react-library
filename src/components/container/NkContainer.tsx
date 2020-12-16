@@ -21,7 +21,8 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
 }) {
 
     const [locationLoaded, setLocationLoaded] = React.useState(!requireLocation);
-
+    const [toastPanelLoaded, setToastPanelLoaded] = React.useState(false);
+    const [modalLoaded, setModalLoaded] = React.useState(false);
     React.useEffect(() => {
         stateKey && NkStateManagerUtils.setLocalStorageKey(stateKey);
         NkStateManagerUtils.loadState();
@@ -52,9 +53,9 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
                 <Container style={{
                     position: 'relative'
                 }}>
-                    <NkToastPanel />
-                    <NkModal />
-                    {children}
+                    <NkToastPanel onLoad={() => { setToastPanelLoaded(true); }} />
+                    <NkModal onLoad={() => { setModalLoaded(true); }} />
+                    {toastPanelLoaded && modalLoaded && children}
                 </Container>
             </>}
         </>

@@ -10,5 +10,7 @@ export interface NkModalRef {
     prompt(data: IModalOperation): Promise<string | null>;
     confirm(data: IModalOperation): Promise<boolean | null>;
 }
-export default function NkModal(): JSX.Element;
+export default function NkModal({ onLoad }: {
+    onLoad(): void;
+}): JSX.Element;
 export {};
