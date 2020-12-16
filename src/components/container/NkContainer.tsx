@@ -52,9 +52,9 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
                 <Container style={{
                     position: 'relative'
                 }}>
-                    {children}
                     <NkToastPanel />
                     <NkModal />
+                    {children}
                 </Container>
             </>}
         </>

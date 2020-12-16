@@ -28627,9 +28627,9 @@ function NkContainer(_a) {
             React__default.createElement(Container, { style: {
                     position: 'relative'
                 } },
-                children,
                 React__default.createElement(NkToastPanel, null),
-                React__default.createElement(NkModal, null)))));
+                React__default.createElement(NkModal, null),
+                children))));
 }
 
 var NkRedirect = reactRouterDom.withRouter(function NkRedirect(props) {
