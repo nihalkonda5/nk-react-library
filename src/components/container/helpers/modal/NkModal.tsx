@@ -81,7 +81,7 @@ export default function NkModal() {
                         show: true,
                         type: 'confirm',
                         title: data.title,
-                        body: <p>{data.description}</p>,
+                        body: <p><NkLocalizeText text={data.description || ''} /></p>,
                         buttons: {
                             hasNegativeButton: true,
                             negativeLabel: data.negativeLabel || 'No',

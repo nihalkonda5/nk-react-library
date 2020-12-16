@@ -28551,7 +28551,8 @@ function NkModal() {
                         show: true,
                         type: 'confirm',
                         title: data.title,
-                        body: React.createElement("p", null, data.description),
+                        body: React.createElement("p", null,
+                            React.createElement(NkLocalizeText, { text: data.description || '' })),
                         buttons: {
                             hasNegativeButton: true,
                             negativeLabel: data.negativeLabel || 'No',
