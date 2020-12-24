@@ -28541,7 +28541,7 @@ function NkModal(_a) {
                         show: true,
                         type: 'prompt',
                         title: data.title,
-                        body: (React__default.createElement(NkSimpleInput, { id: '', type: '', label: data.description, defaultValue: data.defaultValue, valueChanged: function (id, value) { setValue(value); } })),
+                        body: (React__default.createElement(NkSimpleInput, { id: '', type: 'input', label: data.description, defaultValue: data.defaultValue, valueChanged: function (id, value) { setValue(value); } })),
                         buttons: {
                             hasNegativeButton: true,
                             negativeLabel: data.negativeLabel || 'Cancel',

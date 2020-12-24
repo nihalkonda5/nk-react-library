@@ -1,6 +1,6 @@
 interface config {
     id: string;
-    type: string | 'rich-text' | 'button' | 'submit' | 'select' | 'custom' | 'input';
+    type: 'rich-text' | 'button' | 'submit' | 'select' | 'custom' | 'input' | 'textarea';
     label?: string;
     placeholder?: string;
     description?: string;

@@ -54,7 +54,7 @@ export default function NkModal({ onLoad }: { onLoad(): void }) {
                         body: (
                             <NkSimpleInput
                                 id=''
-                                type=''
+                                type='input'
                                 label={data.description}
                                 defaultValue={data.defaultValue}
                                 valueChanged={(id, value) => { setValue(value); }} />
