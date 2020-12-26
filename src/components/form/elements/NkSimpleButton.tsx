@@ -5,12 +5,12 @@ import { Button } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
-export default function NkSimpleButton({
+export default function NkSimpleButton<T>({
     id,
     inline,
     label,
     formButtonClicked
-}: config) {
+}: config<T>) {
     return (
         <Button
             className={inline ? 'd-inline' : ''}

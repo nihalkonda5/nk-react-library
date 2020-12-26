@@ -11,7 +11,7 @@ import { Form } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
 //import ReactQuill from 'react-quill'
 
-export default class NkRichTextEditor extends Component<config> {
+export default class NkRichTextEditor<T> extends Component<config<T>> {
     //@ts-ignore
     quill: ReactQuillEditor
 

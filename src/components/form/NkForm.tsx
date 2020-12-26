@@ -6,10 +6,10 @@ import { NkLocalizeText } from '../commons';
 import NkFormElement from './elements/NkFormElement'
 import { config } from './elements/NkFormElementTypes';
 
-export default class MyForm extends Component<{
+export default class MyForm<T> extends Component<{
     title?: string
     description?: string
-    formConfig: config[]
+    formConfig: config<T>[]
     formButtonClicked?: Function
     formSubmit: Function
 }> {
@@ -20,7 +20,7 @@ export default class MyForm extends Component<{
     }
 
     componentDidMount() {
-        this.props.formConfig.forEach((fc: config) => {
+        this.props.formConfig.forEach((fc: config<T>) => {
             if (fc.defaultValue !== undefined)
                 this.updateResult(fc.id, fc.defaultValue)
         })
@@ -36,7 +36,7 @@ export default class MyForm extends Component<{
             >
                 {this.props.title && <h3><NkLocalizeText text={this.props.title} /></h3>}
                 {this.props.description && <p className='text-muted'><NkLocalizeText text={this.props.description} /></p>}
-                {this.props.formConfig.map((fc: config) => (
+                {this.props.formConfig.map((fc: config<T>) => (
                     <NkFormElement
                         key={fc.id}
                         elementConfig={{

@@ -3,21 +3,28 @@
 import React from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
-import { config } from './NkFormElementTypes'
 
-export default function NkButtonGroup({
+interface INkButtonGroup<T> {
+    id?: string,
+    valueList: { label: string, value: T }[],
+    defaultValue?: { label: string, value: T },
+    valueChanged(id: string, value: { label: string, value: T }): void
+}
+
+export default function NkButtonGroup<T>({
     id,
     defaultValue,
     valueChanged,
     valueList
-}: config) {
-    const [selectedButton, setSelectedButton] = React.useState(
-        defaultValue || { label: '', value: null }
+}: INkButtonGroup<T>) {
+
+    const [selectedButton, setSelectedButton] = React.useState<{ label: string, value: T }>(
+        defaultValue || valueList[0]
     )
 
     React.useEffect(() => {
         if (selectedButton.value) {
-            valueChanged && valueChanged(id, selectedButton)
+            valueChanged && valueChanged(id || '', selectedButton)
         }
     }, [selectedButton])
 

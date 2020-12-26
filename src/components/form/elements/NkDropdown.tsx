@@ -3,13 +3,13 @@ import { Form } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
-export default function NkDropdown({
+export default function NkDropdown<T>({
     id,
     valueList,
     defaultValue,
     required,
     valueChanged
-}: config) {
+}: config<T>) {
 
     return (
         <Form.Group
@@ -33,7 +33,7 @@ export default function NkDropdown({
 
                         <NkLocalizeText text={v.label} customRender={(text: string) => {
                             return <option
-                                value={v.value}
+                                value={v.value + ''}
                                 selected={v.value === defaultValue}>
                                 {text}
                             </option>;

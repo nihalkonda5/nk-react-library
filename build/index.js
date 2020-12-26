@@ -7977,10 +7977,10 @@ function NkImage(_a) {
 
 function NkButtonGroup(_a) {
     var id = _a.id, defaultValue = _a.defaultValue, valueChanged = _a.valueChanged, valueList = _a.valueList;
-    var _b = React__default.useState(defaultValue || { label: '', value: null }), selectedButton = _b[0], setSelectedButton = _b[1];
+    var _b = React__default.useState(defaultValue || valueList[0]), selectedButton = _b[0], setSelectedButton = _b[1];
     React__default.useEffect(function () {
         if (selectedButton.value) {
-            valueChanged && valueChanged(id, selectedButton);
+            valueChanged && valueChanged(id || '', selectedButton);
         }
     }, [selectedButton]);
     return (React__default.createElement(ButtonGroup, { id: id, style: {
@@ -24788,7 +24788,7 @@ function NkDropdown(_a) {
                 valueChanged && valueChanged(id, event.target.value);
             } }, valueList === null || valueList === void 0 ? void 0 : valueList.map(function (v) {
             return React__default.createElement(NkLocalizeText, { text: v.label, customRender: function (text) {
-                    return React__default.createElement("option", { value: v.value, selected: v.value === defaultValue }, text);
+                    return React__default.createElement("option", { value: v.value + '', selected: v.value === defaultValue }, text);
                 } });
         }))));
 }

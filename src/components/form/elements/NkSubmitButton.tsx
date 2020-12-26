@@ -5,13 +5,13 @@ import { Button } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
-export default function NkSubmitButton({
+export default function NkSubmitButton<T>({
     id,
     inline,
     defaultValue,
     label,
     valueChanged
-}: config) {
+}: config<T>) {
     return (
         <Button
             className={inline ? 'd-inline' : ''}

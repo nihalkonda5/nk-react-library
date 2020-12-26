@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap'
 import { NkLocalizeText } from '../../commons'
 import { config } from './NkFormElementTypes'
 
-export default function NkSimpleInput({
+export default function NkSimpleInput<T>({
     id,
     type,
     isTextarea,
@@ -15,7 +15,7 @@ export default function NkSimpleInput({
     required,
     valueChanged,
     description
-}: config) {
+}: config<T>) {
     let attrs: any = { type: type || 'text' }
 
     if (isTextarea || type === 'textarea') {

@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { config } from './elements/NkFormElementTypes';
-export default class MyForm extends Component<{
+export default class MyForm<T> extends Component<{
     title?: string;
     description?: string;
-    formConfig: config[];
+    formConfig: config<T>[];
     formButtonClicked?: Function;
     formSubmit: Function;
 }> {

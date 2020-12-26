@@ -8,10 +8,10 @@ import NkSimpleButton from './NkSimpleButton'
 import NkRichTextEditor from './NkRichTextEditor'
 import NkDropdown from './NkDropdown'
 
-export default function NkFormElement({
+export default function NkFormElement<T>({
     elementConfig
 }: {
-    elementConfig: config
+    elementConfig: config<T>
 }) {
     switch (elementConfig.type) {
         case 'rich-text':

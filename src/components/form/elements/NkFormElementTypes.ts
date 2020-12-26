@@ -1,4 +1,4 @@
-interface config {
+interface config<T> {
     id: string,
     type: 'rich-text' | 'button' | 'submit' | 'select' | 'custom' | 'input' | 'number' | 'email' | 'password' | 'textarea',
     label?: string,
@@ -8,11 +8,11 @@ interface config {
     isTextarea?: boolean,
     required?: boolean,
     defaultValue?: any,
-    valueList?: any[]
-    valueChanged?(id: string, value: any): any,
+    valueList?: { label: string, value: T }[]
+    valueChanged?(id: string, value: { label: string, value: T } | any): any,
     liveSuggestions?: Function,
     formButtonClicked?: Function,
-    customComponent?(c: config): JSX.Element
+    customComponent?(c: config<T>): JSX.Element
 }
 
 export type {
