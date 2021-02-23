@@ -11,9 +11,9 @@ export default class MyForm<T> extends Component<{
     description?: string
     formConfig: config<T>[]
     formButtonClicked?: Function
-    formSubmit: Function
+    formSubmit: (result: { [key: string]: any }) => void
 }> {
-    result: any = {}
+    result: { [key: string]: any } = {}
 
     updateResult = (id: string, value: any) => {
         this.result[id] = value
