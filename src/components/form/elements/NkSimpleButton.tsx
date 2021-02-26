@@ -9,12 +9,13 @@ export default function NkSimpleButton<T>({
     id,
     inline,
     label,
+    inputProps,
     formButtonClicked
 }: config<T>) {
     return (
         <Button
             className={inline ? 'd-inline' : ''}
-            variant='primary'
+            {...inputProps}
             type='button'
             data-id={id}
             onClick={() => {

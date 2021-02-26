@@ -9,6 +9,7 @@ export default function NkSubmitButton<T>({
     id,
     inline,
     defaultValue,
+    inputProps,
     label,
     valueChanged
 }: config<T>) {
@@ -19,6 +20,7 @@ export default function NkSubmitButton<T>({
             type='submit'
             data-id={id}
             style={{ margin: 10 }}
+            {...inputProps}
             value={defaultValue}
             onClick={() => {
                 valueChanged && valueChanged(id, defaultValue)

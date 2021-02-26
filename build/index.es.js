@@ -7992,10 +7992,10 @@ function NkButtonGroup(_a) {
 }
 
 function NkSubmitButton(_a) {
-    var id = _a.id, inline = _a.inline, defaultValue = _a.defaultValue, label = _a.label, valueChanged = _a.valueChanged;
-    return (React.createElement(Button, { className: inline ? 'd-inline' : '', variant: 'primary', type: 'submit', "data-id": id, style: { margin: 10 }, value: defaultValue, onClick: function () {
+    var id = _a.id, inline = _a.inline, defaultValue = _a.defaultValue, inputProps = _a.inputProps, label = _a.label, valueChanged = _a.valueChanged;
+    return (React.createElement(Button, __assign({ className: inline ? 'd-inline' : '', variant: 'primary', type: 'submit', "data-id": id, style: { margin: 10 } }, inputProps, { value: defaultValue, onClick: function () {
             valueChanged && valueChanged(id, defaultValue);
-        } },
+        } }),
         React.createElement(NkLocalizeText, { text: label || 'Submit' })));
 }
 
@@ -8018,10 +8018,10 @@ function NkSimpleInput(_a) {
 }
 
 function NkSimpleButton(_a) {
-    var id = _a.id, inline = _a.inline, label = _a.label, formButtonClicked = _a.formButtonClicked;
-    return (React.createElement(Button, { className: inline ? 'd-inline' : '', variant: 'primary', type: 'button', "data-id": id, onClick: function () {
+    var id = _a.id, inline = _a.inline, label = _a.label, inputProps = _a.inputProps, formButtonClicked = _a.formButtonClicked;
+    return (React.createElement(Button, __assign({ className: inline ? 'd-inline' : '' }, inputProps, { type: 'button', "data-id": id, onClick: function () {
             formButtonClicked && formButtonClicked(id);
-        }, style: { margin: 10 } },
+        }, style: { margin: 10 } }),
         React.createElement(NkLocalizeText, { text: label || 'Button' })));
 }
 
