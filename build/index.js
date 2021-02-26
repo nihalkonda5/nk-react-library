@@ -8007,8 +8007,8 @@ function NkSubmitButton(_a) {
 }
 
 function NkSimpleInput(_a) {
-    var id = _a.id, type = _a.type, isTextarea = _a.isTextarea, placeholder = _a.placeholder, label = _a.label, defaultValue = _a.defaultValue, required = _a.required, valueChanged = _a.valueChanged, description = _a.description;
-    var attrs = { type: type || 'text' };
+    var id = _a.id, type = _a.type, isTextarea = _a.isTextarea, placeholder = _a.placeholder, label = _a.label, defaultValue = _a.defaultValue, required = _a.required, inputProps = _a.inputProps, valueChanged = _a.valueChanged, description = _a.description;
+    var attrs = __assign({ type: type || 'text' }, inputProps);
     if (isTextarea || type === 'textarea') {
         attrs = { as: 'textarea', rows: '5', cols: '20' };
     }

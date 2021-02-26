@@ -8,6 +8,9 @@ interface config<T> {
     isTextarea?: boolean;
     required?: boolean;
     defaultValue?: any;
+    inputProps?: {
+        [k: string]: string;
+    };
     valueList?: {
         label: string;
         value: T;

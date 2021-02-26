@@ -13,10 +13,11 @@ export default function NkSimpleInput<T>({
     label,
     defaultValue,
     required,
+    inputProps,
     valueChanged,
     description
 }: config<T>) {
-    let attrs: any = { type: type || 'text' }
+    let attrs: any = { type: type || 'text', ...inputProps }
 
     if (isTextarea || type === 'textarea') {
         attrs = { as: 'textarea', rows: '5', cols: '20' }

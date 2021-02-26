@@ -8,6 +8,7 @@ interface config<T> {
     isTextarea?: boolean,
     required?: boolean,
     defaultValue?: any,
+    inputProps?: { [k: string]: string },
     valueList?: { label: string, value: T }[]
     valueChanged?(id: string, value: { label: string, value: T } | any): any,
     liveSuggestions?: Function,
