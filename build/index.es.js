@@ -28597,10 +28597,10 @@ function NkModal(_a) {
 }
 
 function NkContainer(_a) {
-    var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary;
-    var _b = React.useState(!requireLocation), locationLoaded = _b[0], setLocationLoaded = _b[1];
-    var _c = React.useState(false), toastPanelLoaded = _c[0], setToastPanelLoaded = _c[1];
-    var _d = React.useState(false), modalLoaded = _d[0], setModalLoaded = _d[1];
+    var headerComponent = _a.headerComponent, requireLocation = _a.requireLocation, stateKey = _a.stateKey, children = _a.children, dictionary = _a.dictionary, _b = _a.shouldBodyBeRelative, shouldBodyBeRelative = _b === void 0 ? true : _b, _c = _a.shouldBodyBeFluid, shouldBodyBeFluid = _c === void 0 ? false : _c;
+    var _d = React.useState(!requireLocation), locationLoaded = _d[0], setLocationLoaded = _d[1];
+    var _e = React.useState(false), toastPanelLoaded = _e[0], setToastPanelLoaded = _e[1];
+    var _f = React.useState(false), modalLoaded = _f[0], setModalLoaded = _f[1];
     React.useEffect(function () {
         stateKey && NkStateManagerUtils$1.setLocalStorageKey(stateKey);
         NkStateManagerUtils$1.loadState();
@@ -28623,9 +28623,9 @@ function NkContainer(_a) {
                 } }),
         locationLoaded && React.createElement(React.Fragment, null,
             headerComponent,
-            React.createElement(Container, { style: {
+            React.createElement(Container, { style: shouldBodyBeRelative ? {
                     position: 'relative'
-                } },
+                } : {}, fluid: shouldBodyBeFluid },
                 React.createElement(NkToastPanel, { onLoad: function () { setToastPanelLoaded(true); } }),
                 React.createElement(NkModal, { onLoad: function () { setModalLoaded(true); } }),
                 toastPanelLoaded && modalLoaded && children))));

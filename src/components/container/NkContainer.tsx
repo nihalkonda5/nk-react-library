@@ -12,12 +12,14 @@ import '../../css/quill.css';
 import NkModal from './helpers/modal/NkModal';
 import { NkDictionaryUtils, NkStateManagerUtils } from '../../utils';
 
-export default function NkContainer({ headerComponent, requireLocation, stateKey, children, dictionary }: {
+export default function NkContainer({ headerComponent, requireLocation, stateKey, children, dictionary, shouldBodyBeRelative = true, shouldBodyBeFluid = false }: {
     headerComponent: JSX.Element,
     requireLocation?: boolean,
     stateKey?: string,
     children: any,
-    dictionary?: { [key: string]: { [key: string]: string } }
+    dictionary?: { [key: string]: { [key: string]: string } },
+    shouldBodyBeRelative?: boolean,
+    shouldBodyBeFluid?: boolean
 }) {
 
     const [locationLoaded, setLocationLoaded] = React.useState(!requireLocation);
@@ -50,9 +52,9 @@ export default function NkContainer({ headerComponent, requireLocation, stateKey
 
             {locationLoaded && <>
                 {headerComponent}
-                <Container style={{
+                <Container style={shouldBodyBeRelative ? {
                     position: 'relative'
-                }}>
+                } : {}} fluid={shouldBodyBeFluid}>
                     <NkToastPanel onLoad={() => { setToastPanelLoaded(true); }} />
                     <NkModal onLoad={() => { setModalLoaded(true); }} />
                     {toastPanelLoaded && modalLoaded && children}
