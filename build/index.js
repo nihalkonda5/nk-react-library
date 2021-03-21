@@ -28664,37 +28664,89 @@ var index$3 = /*#__PURE__*/Object.freeze({
     NkLocationLoader: LocationLoader
 });
 
-var MyForm = /** @class */ (function (_super) {
-    __extends(MyForm, _super);
-    function MyForm() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.result = {};
-        _this.updateResult = function (id, value) {
-            _this.result[id] = value;
-        };
-        return _this;
-    }
-    MyForm.prototype.componentDidMount = function () {
-        var _this = this;
-        this.props.formConfig.forEach(function (fc) {
-            if (fc.defaultValue !== undefined)
-                _this.updateResult(fc.id, fc.defaultValue);
+function NkForm(_a) {
+    var title = _a.title, description = _a.description, formConfig = _a.formConfig, formButtonClicked = _a.formButtonClicked, formSubmit = _a.formSubmit;
+    var _b = React__default.useState({}), result = _b[0], setResult = _b[1];
+    var updateResult = function (id, value, override) {
+        if (override === void 0) { override = true; }
+        if (!override) {
+            //not trying to override
+            if (result[id]) {
+                //value is already available
+                return;
+            }
+        }
+        setResult(function (prevResult) {
+            prevResult[id] = value;
+            return prevResult;
         });
     };
-    MyForm.prototype.render = function () {
-        var _this = this;
-        return (React__default.createElement(FormImpl, { onSubmit: function (event) {
-                event.preventDefault();
-                _this.props.formSubmit(_this.result);
-            } },
-            this.props.title && React__default.createElement("h3", null,
-                React__default.createElement(NkLocalizeText, { text: this.props.title })),
-            this.props.description && React__default.createElement("p", { className: 'text-muted' },
-                React__default.createElement(NkLocalizeText, { text: this.props.description })),
-            this.props.formConfig.map(function (fc) { return (React__default.createElement(NkFormElement, { key: fc.id, elementConfig: __assign(__assign({}, fc), { valueChanged: _this.updateResult, formButtonClicked: _this.props.formButtonClicked }) })); })));
-    };
-    return MyForm;
-}(React.Component));
+    React__default.useEffect(function () {
+        formConfig.forEach(function (fc) {
+            if (fc.defaultValue !== undefined)
+                updateResult(fc.id, fc.defaultValue, false);
+        });
+    }, [formConfig]);
+    return (React__default.createElement(FormImpl, { onSubmit: function (event) {
+            event.preventDefault();
+            formSubmit(result);
+        } },
+        title && React__default.createElement("h3", null,
+            React__default.createElement(NkLocalizeText, { text: title })),
+        description && React__default.createElement("p", { className: 'text-muted' },
+            React__default.createElement(NkLocalizeText, { text: description })),
+        formConfig.map(function (fc) { return (React__default.createElement(NkFormElement, { key: fc.id, elementConfig: __assign(__assign({}, fc), { valueChanged: updateResult, formButtonClicked: formButtonClicked }) })); })));
+}
+/*
+export default class MyForm<T> extends Component<{
+    title?: string
+    description?: string
+    formConfig: config<T>[]
+    formButtonClicked?: Function
+    formSubmit: (result: { [key: string]: any }) => void
+}> {
+    result: { [key: string]: any } = {}
+
+    updateResult = (id: string, value: any) => {
+        this.result[id] = value
+    }
+
+    componentDidMount() {
+        this.props.formConfig.forEach((fc: config<T>) => {
+            if (fc.defaultValue !== undefined)
+                this.updateResult(fc.id, fc.defaultValue)
+        })
+    }
+
+    componentDidUpdate() {
+
+    }
+
+    render() {
+        return (
+            <Form
+                onSubmit={(event) => {
+                    event.preventDefault()
+                    this.props.formSubmit(this.result)
+                }}
+            >
+                {this.props.title && <h3><NkLocalizeText text={this.props.title} /></h3>}
+                {this.props.description && <p className='text-muted'><NkLocalizeText text={this.props.description} /></p>}
+                {this.props.formConfig.map((fc: config<T>) => (
+                    <NkFormElement
+                        key={fc.id}
+                        elementConfig={{
+                            ...fc,
+                            valueChanged: this.updateResult,
+                            formButtonClicked: this.props.formButtonClicked
+                        }}
+                    />
+                ))}
+            </Form>
+        )
+    }
+}
+*/
 
 
 
@@ -28703,7 +28755,7 @@ var index$4 = /*#__PURE__*/Object.freeze({
     Commons: index$2,
     NkContainer: NkContainer,
     NkContainerHelpers: index$3,
-    NkForm: MyForm,
+    NkForm: NkForm,
     NkFormElements: index
 });
 

@@ -1,6 +1,5 @@
-import { Component } from 'react';
 import { config } from './elements/NkFormElementTypes';
-export default class MyForm<T> extends Component<{
+export default function NkForm<T>({ title, description, formConfig, formButtonClicked, formSubmit }: {
     title?: string;
     description?: string;
     formConfig: config<T>[];
@@ -8,11 +7,4 @@ export default class MyForm<T> extends Component<{
     formSubmit: (result: {
         [key: string]: any;
     }) => void;
-}> {
-    result: {
-        [key: string]: any;
-    };
-    updateResult: (id: string, value: any) => void;
-    componentDidMount(): void;
-    render(): JSX.Element;
-}
+}): JSX.Element;
